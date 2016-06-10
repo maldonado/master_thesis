@@ -1,0 +1,48 @@
+\documentstyle[12pt]{report}
+
+\include{format}
+
+\def\setspacing#1{\renewcommand{\baselinestretch}{#1}\small\normalsize}
+
+\include{title}
+
+\renewcommand{\baselinestretch}{2}
+
+
+\newenvironment{shortfigure}%
+{\begin{figure}\setspacing{1}}%
+{\end{figure}}
+
+
+\newenvironment{prog}%
+{\begin{tt}%
+\begin{tabbing}%
+xxxxxx \= xx \= xx \= xx \= xx \= xx \= \kill}%
+{\end{tabbing}\end{tt}}
+
+
+\begin{document}
+
+\special{ps: plotfile psfig.pro global}
+\input psfig
+
+\include{abstract}
+\include{ack}
+
+\addcontentsline{toc}{chapter}{List of Figures}
+\tableofcontents
+
+\listoffigures
+
+\include{chap1}
+\include{chap2}
+\include{chap3}
+
+\bibliography{abbr,thesis}
+\bibliographystyle{alpha}
+
+\appendix
+
+\include{appendix}
+
+\end{document}

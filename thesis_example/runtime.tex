@@ -1,0 +1,96 @@
+\begin{figure}[bhtp]
+\begin{center}
+\begin{picture}(500,360)
+
+% Object stack
+
+\thicklines
+\put( 60,  0){\line(0,1){360}}
+\put(140,  0){\line(0,1){360}}
+\put( 60, 20){\line(1,0){ 80}}
+\put( 60,220){\line(1,0){ 80}}
+\thinlines
+\put(60, 40){\line(1,0){80}}
+\put(60, 60){\line(1,0){80}}
+\put(60, 80){\line(1,0){80}}
+\put(60,100){\line(1,0){80}}
+\put(60,120){\line(1,0){80}}
+\put(60,140){\line(1,0){80}}
+\put(60,160){\line(1,0){80}}
+\put(60,180){\line(1,0){80}}
+\put(60,200){\line(1,0){80}}
+\put(60,240){\line(1,0){80}}
+\put(60,260){\line(1,0){80}}
+\put(60,280){\line(1,0){80}}
+\put(60,300){\line(1,0){80}}
+\put(60,320){\line(1,0){80}}
+\put(60,340){\line(1,0){80}}
+\put(20,30){\makebox(0,0)[r]{\tt osp}}
+\put(20,30){\vector(1,0){40}}
+\put(20,210){\makebox(0,0)[r]{\tt hwm}}
+\put(20,210){\vector(1,0){40}}
+\put(20,230){\makebox(0,0)[r]{\tt osp'}}
+\put(20,230){\vector(1,0){40}}
+\put(100, 30){\makebox(0,0){\tt result}}
+\put(100, 50){\makebox(0,0){\tt self}}
+\put(100, 70){\makebox(0,0){$a_1$}}
+\put(100, 90){\makebox(0,0){$a_2$}}
+\put(100,110){\makebox(0,0){$\cdots$}}
+\put(100,130){\makebox(0,0){$a_p$}}
+\put(100,150){\makebox(0,0){$v_1$}}
+\put(100,170){\makebox(0,0){$v_2$}}
+\put(100,190){\makebox(0,0){$\cdots$}}
+\put(100,210){\makebox(0,0){$v_q$}}
+\put(100,230){\makebox(0,0){\tt result}}
+\put(100,250){\makebox(0,0){\tt self}}
+\put(100,270){\makebox(0,0){$a_1'$}}
+\put(100,290){\makebox(0,0){$a_2'$}}
+\put(100,310){\makebox(0,0){$\cdots$}}
+\put(100,330){\makebox(0,0){$a_r'$}}
+\put(150,300){\makebox(0,0)[l]{Object stack}}
+
+% Current Object
+
+\thicklines
+\put(220, 40){\line(0,1){100}}
+\put(300, 40){\line(0,1){100}}
+\put(220, 40){\line(1,0){80}}
+\put(220,140){\line(1,0){80}}
+\thinlines
+\put(220, 60){\line(1,0){80}}
+\put(220, 80){\line(1,0){80}}
+\put(220,100){\line(1,0){80}}
+\put(220,120){\line(1,0){80}}
+\put(260, 70){\makebox(0,0){$o_1$}}
+\put(260, 90){\makebox(0,0){$o_2$}}
+\put(260,110){\makebox(0,0){$o_3$}}
+\put(260,130){\makebox(0,0){$o_4$}}
+\put(260,160){\makebox(0,0){Current object}}
+
+% Class descriptor
+
+\thicklines
+\put(380, 40){\line(0,1){100}}
+\put(460, 40){\line(0,1){100}}
+\put(380, 40){\line(1,0){80}}
+\put(380,140){\line(1,0){80}}
+\thinlines
+\put(380, 80){\line(1,0){80}}
+\put(380,100){\line(1,0){80}}
+\put(380,120){\line(1,0){80}}
+\put(420, 60){\makebox(0,0){header}}
+\put(420, 90){\makebox(0,0){$m_1$}}
+\put(420,110){\makebox(0,0){$m_2$}}
+\put(420,130){\makebox(0,0){$m_3$}}
+\put(420,160){\makebox(0,0){Class descriptor}}
+
+% Pointers
+
+\put(130,50){\vector(1,0){90}}
+\put(260,50){\vector(1,0){120}}
+
+\end{picture}
+\end{center}
+\caption{Run-time Data Structures}
+\label{fig:runtime}
+\end{figure}

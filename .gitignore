@@ -1,0 +1,16 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
+
+
+*.aux
+*.bbl
+*.blg
+*.log
+*.gz
+*main.pdf
+*.pdf.orig
+
+*.fdb_latexmk
+*.fls

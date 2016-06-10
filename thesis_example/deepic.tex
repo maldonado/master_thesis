@@ -1,0 +1,66 @@
+
+\begin{figure}[htb]
+\begin{center}
+\begin{picture}(440,280) \thicklines
+
+% Framed text boxes
+
+\put(120,260){\framebox(120,20){Editor}}
+
+\put(120,180){\framebox(120,20){Scanner/Parser}}
+
+\put(300,140){\framebox(120,20){Code Generator}}
+
+\put(120,100){\framebox(120,20){Semantic Analyzer}}
+
+%\put(280,100){\framebox( 80,20){Maker}}
+
+\put(0,60){\framebox( 80,20){Browser}}
+
+\put(120,60,){\framebox(120,20){CIM}}
+
+\put(280,60){\framebox( 80,20){Linker}}
+
+% Ovals with text
+
+\put(180,230){\makebox(0,0){Dee Source}}
+\put(180,230){\oval(80,20)}
+
+\put(180,150){\makebox(0,0){AST}}
+\put(180,150){\oval(80,20)}
+
+\put(180,30){\makebox(0,0){CIDB}}
+\put(180,30){\oval(80,20)}
+
+\put(350,10){\makebox(0,0){C Source}}
+\put(350,10){\oval(80,20)}
+
+% Arrows
+
+\put(180,260){\vector(0,-1){20}}   % Editor -> Dee Source
+\put(180,220){\vector(0,-1){20}}   % Dee Source -> Scanner/Parser
+\put(180,180){\vector(0,-1){20}}   % Scannar/Parser -> AST
+\put(120,70){\vector(-1,0){40}}    % Browser <- DBMS
+\put(220,150){\vector(1,0){80}}   % AST -> Code Gernerator
+\put(370,140){\vector(0,-1){120}}  % Code Generator -> C Source
+\put(240,70){\vector(1,0){40}}     % DBMS -> Linker
+%\put(320,100){\vector(0,-1){20}}   % Maker -> Linker
+\put(320,60){\vector(0,-1){40}}    % Linker -> C Source
+
+\put(180,130){\vector(0,-1){10}}   % AST <-> Semantic Analyzer
+\put(180,130){\vector(0,1){10}}
+
+\put(180,90){\vector(0,-1){10}}    % Semantic Analyzer <-> DBMS
+\put(180,90){\vector(0,1){10}}
+
+\put(180,50){\vector(0,-1){10}}    % DBMS <-> Interfaces
+\put(180,50){\vector(0,1){10}}
+
+%\put(260,70){\line(0,1){40}}       % DBMS -> Maker
+%\put(260,110){\vector(1,0){20}}
+
+\end{picture}
+\end{center}
+\caption{Dee System Organization}
+\label{fig:system}
+\end{figure}

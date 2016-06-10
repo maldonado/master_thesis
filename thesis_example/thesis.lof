@@ -1,0 +1,30 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Eiffel code for class STACK}}{5}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Dee System Organization}}{9}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Sample Output from the {\tt ri} command.}}{12}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces An example of the Dee mode browser under Emacs. The top window contains the program being edited. The cursor is on the name of the class being browsed in the lower window.}}{13}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces An X window running the Dfolder browser.}}{14}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The {\tt Var} portion of the AST data structure.}}{21}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces A Lex regular expression and its action.}}{23}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Bison specification for Dee method bodies.}}{28}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Loop portion of the AST.}}{30}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Parser specification for PC Dee special methods.}}{31}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Example of a Dee method}}{33}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces C code generated from the Dee method {\tt Entry} for class {\tt Prime}}}{34}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces The C declaration of a Dee object at run-time.}}{35}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces C code to calculate the size of an object.}}{36}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces C run-time data structure for a Class.}}{37}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces An example of an {\tt if} statement in Dee.}}{39}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces The C code generated for the above Dee {\tt if} statement.}}{39}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces A typical Dee {\tt loop} statement.}}{40}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces The code generated for the above {\tt loop} statement.}}{41}
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Basic form of an {\tt attempt} statement.}}{46}
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Runtime class inheritance graph data structures.}}{48}
+\contentsline {figure}{\numberline {2.17}{\ignorespaces The memory management structures used by the collector and allocator.}}{57}
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Code generator statistics.}}{66}
+\contentsline {figure}{\numberline {2.19}{\ignorespaces The run-time data structure for an object.}}{67}
+\contentsline {figure}{\numberline {2.20}{\ignorespaces The {\tt special} Dee method to add two integers.}}{68}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

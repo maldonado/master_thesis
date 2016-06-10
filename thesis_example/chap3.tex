@@ -1,0 +1,96 @@
+
+\chapter{Conclusion}
+
+\section{The Dee System}
+
+In this thesis we have explored the Unix implementation of the Dee
+System.  Because it is rare in the literature, we have taken the time
+to build both hand-coded and generated scanners in order to get an
+accurate comparison.  We have demonstrated how a carefully planed AST
+definition can be used to allow a group of programmers to work
+independently on different parts of the same compiler.  A lack of
+discussion in the literature was enhanced by a careful description of
+code generation from an AST to C source code.  Innovative techniques
+for exception handling and browsing were presented.  And finally, one
+of the first in-depth discussions of a mark-and-sweep generational
+garbage collector was presented.  Unlike other generational
+collectors, ours included the ability to dynamically increase the size
+of each generation.
+
+The Dee System can be judged on two different criteria.  The first,
+and most pertinent to this thesis, is an evaluation of the compiler
+and its environment.  This would include the factors that determine
+how usable this particular implementation of the system is.  The
+second criterion would try to determine how successful the Dee language
+is at solving software problems.  An excellent implementation of an
+inadequate idea is of little value to the field of Computer Science.
+I conclude this thesis with a discussion of the different components
+of the compiler and suggest ways in which they might be improved.
+
+Creating a hand coded scanner and parser would slightly enhance the
+performance of the compiler, but the time it would take to do this
+could be better spent elsewhere.  If any change to these components is
+undertaken, it would make the most sense to improve their error
+reporting capabilities. 
+
+Code generation is the portion of the compiler with the most room for
+improvement.  Because generated code is so difficult to debug, the
+current version makes no attempt to optimize at all.  Future versions
+could produce better C code by implementing some very simple
+improvements such as peep hole optimization and removal of unreachable
+code.  
+
+Generating code directly into object format and avoiding the C
+intermediate step would improve performance significantly.  This is a
+very difficult step and would most likely tie the Dee System to a
+particular piece of hardware.  A better alternative might be to use a
+machine-independent back end.  The GNU team has a back end which
+produces code for a large number of different CPUs.  Documentation for
+the software is nonexistent, but the source code is freely available.
+If documentation does become available, this software might serve as
+an inexpensive but highly portable and efficient way to compile
+directly from Dee code into object code.
+
+The garbage collector could also be improved in several ways.
+Currently, it is quite efficient in time and memory reclamation, but
+expends the very large overhead of one word per object.  It would not
+be difficult to get this down to a few bits per object.  As Goldberg
+points out in \cite{Goldberg91}, modern garbage collectors should be
+able to eliminate, almost entirely, any per object tag fields.
+
+I believe the implementation described in this thesis is a surprising
+success.  There is no end of improvements that can be made, but given
+the fact that it was completed by only a few master's students working
+under one supervisor, we have achieved impressive results.  The Dee
+system works.  It is the first implementation of a strongly typed
+programming language that supports the object oriented paradigm,
+exception handling, multiple inheritance, automatic garbage collection
+and a sophisticated browser, that we are aware of.  We have
+successfully created a small class library and run several small
+applications.
+
+In order to judge the success of the Dee language, many more
+applications will have to be created.  As the compiler undergoes more
+and more use we will be better able to understand its strong points
+and weaknesses.
+
+
+
+\section{Related Work}
+
+The work that is closest to the Dee project is the {\em Self} project
+being carried out at Stanford University.  David Ungar and Craig
+Chambers have created a Smalltalk-like language and environment, which
+supports the object oriented paradigm.  Unlike Dee, Self is dynamically
+typed and compiles directly to machine code.  For more information
+about Self see \cite{Chambers91}.
+
+Much work is also being done in the field of garbage collection.  Work
+on improving the efficiency of allocating records is being done by
+Appel \cite{Appel89}.  One issue that was not discussed in depth in
+this thesis is locality of memory access during garbage collection.
+Work is being done in this area by Wilson, Lam and Moher
+\cite{Wilson91}.  
+
+
+ 

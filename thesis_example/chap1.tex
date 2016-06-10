@@ -1,0 +1,523 @@
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\chapter{Introduction}
+
+\section{Object Oriented Programming}
+
+Object oriented concepts are not new to the field of computer
+programming.  Almost all aspects of what we currently include under
+the umbrella of the object oriented paradigm were present in early
+programming languages.  Work on SIMULA \cite{Nygaard81} began in
+Norway in the early 60's.  The first version was a simulation
+language.  The final version was designed to be a general purpose
+programming language.  By the time SIMULA 67 was finished, it
+contained most of the features we commonly think of as being essential
+to an object oriented programming language.  Other object oriented
+programming languages did not start appearing until about the early
+eighties, but they are becoming very popular.
+
+Much of the motivation for the current popularity of object oriented
+programming languages is a direct result of the high cost of software
+creation and maintenance.  Maintenance can be described as modifying
+software that has already been delivered.  These modifications can
+consist of error corrections or alterations as a result of design or
+specification changes.  On page 536 in \cite{Sommerville89},
+Sommerville points out that ``\ldots maintenance costs are, by far,
+the greatest cost incurred in developing and using a system.''
+
+The rest of this section contains an introduction to some of the most
+important features of the object oriented paradigm.  The final section
+of this chapter is an introduction to the Dee System.
+
+\subsection{Classes and Objects}
+
+A {\em module} is a syntactic unit of a programming language.
+Programs can be created by composing several modules, with each module
+having its own set of variables and procedures.  The way in which
+other syntactic units of a program can access the internals of a
+module define its {\em interface}.  A {\em class} is a kind of module;
+it is an abstraction of an entity that is manipulated by the software
+system.  The difference between a class and a module lies in the type
+of interface they provide.  In languages that support modules, a
+module can often export types, constants, variables and procedures.
+In most languages that support the object oriented paradigm, classes
+can only\footnote{Usually, a class also implicitly exports one type so
+that we can declare instances of the class.} export procedures that
+can be performed on instances of the particular class exporting them.
+In object oriented parlance, an instance of a class is called an {\em
+object}.
+
+The class is the main conduit used in the object oriented paradigm to
+solve software cost problems.  Unlike the techniques used in
+structured, top-down programming, system modularity using classes is
+more closely related to data than to functionality.  When designing an
+object oriented system, one first looks at the objects that are
+manipulated by the system rather than the functionality of the system
+\cite{Meyer88}. 
+
+One example of an object manipulated by a system might be a stack.  A
+particular system may have several stacks as data structures.  Each of
+these stacks might be an object of the same class, that is, the class
+{\tt Stack}.  The ways in which an object of the class {\tt Stack}
+performs stack operations is by receiving a request to act from
+another object.
+
+\subsection{Messages and Interfaces}
+
+A {\em method} is a procedure defined for a particular class.  A {\em
+message} is a request by one object, to have another object execute
+one of its methods.  This idea of exporting methods is related to the
+concept of a message.  When a class exports a particular method it
+means that an instance of the class will accept a message that
+corresponds to a particular method.  When a message is received by an
+object, it executes the appropriate method.  Only messages that have
+been explicitly exported by the class may safely be received by
+instances of that class.  It is the job of the type system and
+semantic analyzer to ensure that such unexpected messages are never
+sent.
+
+Because in most object oriented programming languages data internal to
+an object can not be exported, it can only be manipulated by methods
+exported by its class.  In languages that do allow variables to be
+exported, this usually\footnote{In some languages it is possible to
+make exported variables writable.  The {\tt friends} specifier in C++
+is an example.} makes them {\em read only} and saves the programmer
+from having to write a function that simply returns a variable's
+value. Exported methods may, in turn, invoke {\em private} (not
+exported) methods of the class, which may also alter an object's data.
+Still, in most cases, any change in the state of an object is
+ultimately the result of a received message, corresponding to a public
+method.  This results in a high degree of data encapsulation and
+information hiding at the object level.
+
+\subsection{Genericity}
+
+Genericity permits the passing of type parameters to classes.  It is
+similar to argument passing in functions.  This passing of types
+allows one class to operate on many different types.  In
+\cite{Meyer88} Meyer uses the example of a stack.  A portion of the
+Eiffel code for class {\em STACK} with a generic type parameter is
+shown in figure \ref{prog:STACK}
+
+\begin{shortfigure}
+\begin{verbatim}
+-- Stack elements of an arbitrary type T
+class STACK[T] export nb_elements, empty, push, pop, top
+feature
+
+    push ( x : T ) is
+      -- Add x on top of the stack
+    do ... end
+
+    top : T is
+      -- the element on the top of the stack
+    do ... end
+
+    pop : T is
+      -- remove the top element from the stack and return it
+    do ... end
+
+    .
+    .
+    .
+
+end -- class STACK
+\end{verbatim}
+\caption{Eiffel code for class STACK}
+\label{prog:STACK}
+\end{shortfigure}
+
+In this example, {\tt T} is a formal generic parameter to the class {\em
+STACK}.  Genericity allows us to use the same implementation of stack
+on several different data types.  We can have a stack of integers, a
+stack of floats or even a stack of arrays of integers.  Absence of
+genericity might force us to write a separate implementation for each
+data type.  Untyped object oriented languages do not require
+genericity to achieve the same degree of code reuse, but do not reap
+the benefits of strong type checking.
+
+
+\subsection{Exception Handling}
+\label{sec:except}
+
+Exceptions are used to indicate unexpected or error conditions
+occurring in a section of code.  Some examples of exceptions might be
+an attempt to divide by zero or to open a file that does not exist.
+Means to deal with these problems are built into several (not
+necessarily object oriented) programming languages including Eiffel
+\cite{Meyer88}, Ada \cite{Booch83}, Smalltalk \cite{Goldberg83} and
+CLU \cite{Liskov81}.  A {\em signal} is the means used to indicate
+that an exception condition has occured.  We use the term {\em raise}
+to describe the act of altering the flow of control with a signal.
+Usually, the method of dealing with an exception is to allow a
+non-local exit from the code in which it occurred.  A {\em handler} is
+a section of code that has made known its willingness to deal with
+these singularities.  When an exception occurs, a signal is raised
+and control is transferred to a handler.
+
+An example used by Grogono in \cite{Grogono90} is that of matrix
+inversion.  It is difficult for a function to determine if a matrix is
+invertible without doing much of the calculation required to actually
+do the inversion.  This makes it undesirable to check the precondition
+that the matrix is invertible before attempting the operation.
+Exceptions give us a way of neatly exiting the inversion function if
+it is unable to complete its task.  In addition, an exception and
+handling mechanism built into the language gives the programmer
+greater flexibility in determining how and where a problem should be
+handled.  This is accomplished by allowing exception handlers the
+option of dealing with the problem or passing it on to an outer scope
+of handlers.
+
+
+
+
+\section{The Dee System}
+
+Code reuse and efficient program maintenance are two important goals
+of almost every large software system.  Although object oriented
+programming has frequently been offered as a way of solving these
+problems, the potential benefits of the object oriented paradigm have
+not yet been realized in currently available products. The Dee System
+is a complete software development environment created with the aim of
+solving these problems.
+
+In designing the Dee system, the following six principles laid a
+foundation on which to build.
+
+\begin{enumerate}
+
+\item Information should not be duplicated.
+
+\item All information related to a program entity should be in one
+place.
+
+\item The programmer should not have to provide information that the
+compiler can easily infer and display.
+
+\item Semantic analysis performed by the compiler should not be
+complicated.  
+
+\item A language that is intended for the development of production
+quality software should be strongly typed.
+
+\item The language should support the chosen programming paradigm
+completely and consistently.
+
+\end{enumerate}
+
+I present these principles so that the reader who is familiar with other
+object oriented programming languages will understand some of the ways
+in which they differ from Dee. A deeper explanation of these design
+principles can be found in \cite{Grogono90}.
+
+These principles were chosen because it is hoped that they enable the
+Dee system to satisfy its three primary goals.
+
+\begin{enumerate}
+
+\item a programming language that provides full support for the object
+oriented paradigm;
+
+\item a programming environment for the language that supports all phases
+of software development; and
+
+\item a library of classes that facilitate both coding at a high level of
+abstraction and efficient object code.
+
+\end{enumerate}
+
+\subsection{The Dee Programming Language}
+
+The focal point of the Dee Project is the Dee programming language
+created by Peter Grogono.  It contains most of the trademark features
+of the object oriented paradigm including multiple inheritance,
+encapsulation, genericity, automatic garbage collection and exception
+handling.  In addition it contains several features not previously
+found in programming languages.  These additional features center on
+the data base of class interfaces maintained by the compiler and will
+be discussed below.
+
+\input{deepic}
+
+Figure \ref{fig:system} gives an overall picture of the Dee System and
+illustrates the way in which its individual components (rectangles)
+and data structures (ovals) interact.  I have written the
+editor\footnote{Actually, I have created specialized editing features
+for the already existing editor called Emacs.}, the scanner, the
+parser and the code generator.  I also created much of the Dee
+run-time system including the garbage collector and several base
+classes.  In addition, I contributed a large amount of effort to the
+semantic analyzer originally written by Wai Ming Wong.  I will now
+give a brief explanation of the most important parts of the Dee
+system.  In depth explanations of the portions that I have
+contributed are presented in Chapter 2.
+
+\subsection{The Compiler}
+
+The Dee compiler can be broken down into several main components along
+the lines found in most compilers.  There is a scanner, a parser, a
+semantic analyzer and a code generator.  The scanner and parser create
+an Abstract Syntax Tree (AST) and the semantic analyzer decorates it.
+Finally, the code generator traverses it and outputs C code.  Unlike
+other compilers, the Dee compiler has an additional component called
+the Class Interface Manager (CIM).  This module acts as an interface
+between the compiler and the database of class interfaces.  Whenever
+the semantic analyzer needs information about the interface of an
+ancestor or client class, it queries the CIM.  If no errors are
+encountered during compilation, the interface to the class being
+compiled is also written to the CIM.
+
+\subsection{The Browser}
+
+The browser exists in several forms, the first completed and the most
+primitive of which is the {\tt ri} command.  The {\tt ri} command was
+written to allow the programmers working on the Dee project to examine
+the interface to particular classes stored in the CIDB by making
+requests to the CIM.  It was created to work as a test and verification
+tool rather than a programming aid.  Only after the Dee compiler was
+first being tested did we realize it was quite useful to Dee
+programmers as a browser.  It now serves as the basic tool with which
+more sophisticated browsers have been built.
+
+The {\tt ri} command outputs a description of the interface for the
+class specified on the command line.  It has several options that
+determine the amount of information to display.  Some of these options
+provide the ability to specify only one attribute, other options add
+information about how and where specific attributes are defined and
+implemented.  Figure \ref{fig:ri} is an example of a portion of the
+output of the {\tt ri} command on the class {\tt File}.
+
+\begin{shortfigure}
+\begin{verbatim}
+class File
+
+inherit Stream  
+uses String Bool  
+Ancestors Output Input Device Stream  
+
+public var handler:Int 
+   source class: Device
+
+public var option:String 
+   source class: Stream
+
+public method close 
+   From
+   Defined By : Device
+   Implement By : Device
+
+public method eof  : Bool 
+-- return ture if reach the end of file.
+ 
+   Dee Instruction
+   Defined By : File
+   Implement By : File
+
+public method open 
+-- Function open a file with its' option
+ 
+   Dee Instruction
+   Defined By : Device
+   Implement By : File
+
+public method read (n:Int ) : String 
+   Dee Instruction
+   Defined By : Input
+   Implement By : Input
+
+public method write (buffer:String )
+   Dee Instruction
+   Defined By : Output
+   Implement By : Output
+\end{verbatim}
+\caption{Sample Output from the {\tt ri} command.}
+\label{fig:ri}
+\end{shortfigure}
+
+This primitive command has been combined with two more sophisticated
+programs to provide better browsing.  The first is a Dee mode for the
+Emacs editor. When editing a Dee program, Dee mode allows a user to
+place the cursor on the name of a class and invoke the {\tt ri}
+command on that class.  A new Emacs window is opened with the output
+from {\tt ri} displayed in it.  Figure \ref{fig:dmode} shows an
+example of the browser being invoked during an editing session.  See
+Section \ref{dee-mode} for more details on Dee mode.
+
+The second browser, written by Benjamin Cheung, runs under the X
+window system and is called ``Dfolder''.  It is graphical, requires a
+mouse, and provides a friendly user interface.  Options and classes
+can be selected by pointing with the mouse and clicking the mouse
+buttons.  Figure
+\ref{fig:dfolder} is a snapshot of the Dfolder running on an X window
+graphical display.  See \cite{Bcheung92} for more detailed information
+on Dfolder.
+
+\begin{shortfigure}
+\centerline{\hbox{
+\psfig{figure=dmode.ps}}}
+\caption{An example of the Dee mode browser under Emacs.  The top 
+window contains the program being edited.  The cursor is on the name
+of the class being browsed in the lower window.}
+\label{fig:dmode}
+\end{shortfigure}
+
+\begin{shortfigure}
+\centerline{\hbox{
+\psfig{figure=dfolder.ps}}}
+\caption{An X window running the Dfolder browser.}
+\label{fig:dfolder}
+\end{shortfigure}
+
+\subsection{The Editor}
+
+The Dee system has an editor at the center of its user interface.  The
+compiler cooperates with the editor in displaying and fixing syntax
+and semantic errors.  As errors are discovered, the editor brings the
+cursor to the delinquent line and allows the user to make a change
+before moving on to the next error.  The editor also works closely
+with the browser to select which classes to browse.
+
+A future version of the Dee editor will be graphical and probably run
+under the X window system.  The current version uses the Emacs editor,
+which runs a special mode customized for Dee source programs.  See
+Section \ref{dee-mode} for more details.
+
+
+\subsection{The Linker}
+
+The Dee linker generates a link file from a collection of classes,
+starting from a given root class.  This file is eventually linked into
+the final C linking phase which produces the Dee executable file. The
+linker may also generate a Unix ``make'' file which will be used to
+control the C compiler and linker.
+
+Linking in Dee is a two step process; there is a Dee linking stage and
+a C linking stage.  This extra linking stage, not normally found in
+non-object oriented programming languages, is a result of dynamic
+binding.  Because Dee allows inheritance, a variable at run-time can
+be an instance of one of many different classes.  When a message is
+sent to such an object, the correct method must be invoked.  The key
+to choosing the correct method is figuring out which is the correct
+slot in the method table.  The compiler can not determine the correct
+slot because it is not until link time that the inheritance hierarchy
+becomes fixed.  The same class, used in different programs, will have
+a different place in the run-time inheritance graph.  The job of the
+Dee linker is to arrange these tables so that, in cases where more
+than one related class implements the same method, it is always at the
+same slot in the method table.  The linker then assigns these offsets
+to variables used at run-time to index the tables.  The linker uses
+table compression techniques in an effort to minimize the size of
+method tables.  More information about the linker and its
+optimizations can be found in
+\cite{Bcheung92} and \cite{Grogono90}.  An explanation of how code is
+generated to allow dynamic binding at run-time can be found in Section
+\ref{sec:applications} about applications.
+
+
+\subsection{PC Dee}
+
+Dee methods come in two flavors, regular and special.  {\em Regular}
+methods are written in Dee.  {\em Special} methods are code that can
+not be written in Dee, this has the added advantage of hiding
+implementation details. Special methods are actually written in C.
+For example, the steps needed to open a disk file for output are
+dependent on particular operating systems.  In our Unix
+implementation, the method {\tt open} in the class {\tt File} is a
+special method.  It is written in C and uses the {\tt open()} system
+call.  Dee programs can avoid knowing about such system dependences
+because the class library hides these details.
+
+The original implementation of Dee was written to run on a PC.  This
+version of the language is different from the version currently
+implemented on Unix in several ways.
+
+The biggest difference is in the back end of the compiler.  The PC Dee
+version emits code for a virtual Dee machine while the Unix version
+emits C code.  The Dee machine is simulated by a big switch statement
+with one label for each instruction in the virtual machine's
+instruction set.  Eliminating the virtual machine in the Unix version
+altered the syntax for the {\em special} Dee methods.  In the PC
+version, a {\em special} method was like any other Dee method except
+that it contained at least one virtual Dee machine instruction in its
+body.  In the Unix version, because Dee machine instructions no longer
+make sense, a {\em special} Dee method consists of a normal method
+signature with its body replaced by the new keyword {\tt special}.
+The Dee linker generates a standard C function prototype based on the
+current class and the name of the method.  The programmer is
+responsible for writing the C function to match the prototype.
+
+The Unix version of the language has been slightly altered to avoid
+using international characters.  This resulted in replacing the use of
+the ``['' and ``]'' characters by ``('' and ``)'' for specifying
+generic class parameters.  Comments were previously surrounded by
+``\{'' and ``\}'' and are now begun with two dashes (``-- --'') and
+terminated at the end of the line.  This convention was borrowed from
+Ada because it has the advantage of never allowing run-on comments.
+That is, if the programmer forgets to include the comment terminating
+symbol (previously ``\}'') the parser can incorrectly interpret a
+portion of the source code.  This usually leads to a plethora of
+strange error messages being produced or a section of code not being
+compiled.  With the Ada convention, it is almost impossible that the
+programmer will forget the end of line character.
+
+Despite these differences, PC Dee is close enough to the new version
+to have been very helpful in making implementation decisions.
+
+\section{The Advantages of Dee}
+
+Dee is a true object oriented programming language. Thus Dee does not have the
+complexity of a hybrid language such as Ada or C++.
+
+Dee is a strongly-typed language. Thus Dee programs are easy to read and
+do not fail at run-time. In this respect, Dee is more secure than untyped
+languages such as CLOS and Smalltalk.
+
+Dee provides ``semantic browsing.'' Semantic browsing depends on
+features of the language and cannot be added retroactively to other
+languages. The {\tt short} and {\tt flat} utilities of Eiffel
+\cite{Meyer88} might at first sight seem to provide a capability
+similar to the browsing features of Dee, but {\tt short} and {\tt
+flat} read the source text of a class.  There is no guarantee that the
+compiled version of the class is up-to-date, or even that the class
+has been compiled. No information other than extracts from the source
+text is provided. The Smalltalk browser is similarly limited.
+
+Dee provides fully automatic storage management. In Ada and C++,
+programmers are responsible for storage management. Errors in storage
+allocation and release are common and notoriously hard to find and correct
+\cite{Sakkinen88}. Storage management adds to both the size and complexity of
+source code.
+
+Class libraries are now available for Ada, C++, and Eiffel. All of them
+provide data {\em structures\/}. The class library of Dee is different in
+that it contains two levels of classes: data abstractions and data
+structures. Data abstractions specify {\em what\/} tasks can be performed
+and data structures describe {\em how\/} they are performed. Programmers
+code using data abstractions and only later, when the program is almost
+complete, choose appropriate data structures to represent the abstractions.
+
+
+\section{Motivation For The Dee Project}
+
+Reducing the high cost of software maintenance is one of primary
+design objectives of Dee.  My work on the Dee project is ultimately
+concerned with determining how well this goal was attained.  A fast
+and efficient compiler is only as useful as the language being
+compiled. An equally important result will be offering alternatives in
+places where Dee falls short of this goal.
+
+My motivation for working on the Dee project comes from two different
+categories: issues involved in designing and programming in an object
+oriented language, and issues involved in writing an object oriented
+compiler and environment.  Because the this is the first Dee compiler
+for Unix and because we have very limited resources, performance is
+not a primary goal.  This is not to say that we paid no attention to
+this issue, just that reasonable performance was required, exceptional
+performance was not.
+
+Despite the fact that I did not design Dee, I was present at many
+discussions which helped shape some of the language design decisions.
+Ultimately these decisions are judged on what happens when they are
+effected by the compiler writers and put to the test by end users
+writing applications.

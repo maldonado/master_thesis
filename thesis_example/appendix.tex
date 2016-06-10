@@ -1,0 +1,529 @@
+\chapter{The Abstract Syntax Tree}
+
+\setspacing{1}{
+\begin{verbatim}
+/*
+	Dee AST struct definitions.
+*/
+
+#ifndef _DEEDEFS_
+#define _DEEDEFS_
+
+#define		NIL		NULL
+
+typedef enum { FALSE, TRUE } Boolean;
+typedef int HashIndex;
+typedef char *StringPtr;
+
+/* Loop types */
+
+typedef enum { Infin_l, While_l, Until_l } LoopType;
+
+/* Literal Number types */
+
+typedef enum { Int, Float, Byte } NumberType;
+
+/* Mode for local variable */
+
+typedef enum { Param, Result, LocalVar } LocalModeType;
+
+typedef enum { IGNOREATTR, FROMSELF, FROMPARENT,
+               FROMCLAUSE } AttriSrc;
+
+typedef enum { MethodM, ConsM } MethodType;
+
+/* A method body is a ``from'', abstract, concrete or an Instr */
+
+typedef enum { BodyUnknown, BodyFrom, BodyAbs, BodyConcrete,
+               BodySpecial } BodyType;
+
+/* An ident node can be a local, inst var, handler local or method */
+
+typedef enum { IdenLocal, IdenInstVar, IdenMethod,
+               IdenCons, IdenHandlerLocal } IdenType;
+
+/* Abstract syntax tree definitions. */
+
+typedef enum { 
+    List, Class, Type, Var, Method,
+    Local, Assign, If, IfPair, DoLoop, Loop,
+    Apply, Iden, Break, Continue, Nil,
+    Attempt, Handler, Signal, Bool, Number,
+    String, Null, Undef, Signature, SymTab, CTemp
+    } ASTNodeType;
+
+			
+typedef struct ASTNode *AST;
+
+struct ASTNode {
+   ASTNodeType NType;
+   int Column, Line;
+
+   union {
+
+      /* Lists of nodes are reprsented with List nodes. The 
+         empty list is represented by NIL. */
+
+      struct {
+         AST Node; 
+         AST Next;
+      } List;
+
+      /* A Class node describes an entire class. */
+
+      struct {
+         HashIndex ClassName;      /* Name of the class */
+         StringPtr ClassComment;   /* Comment following class header */
+         AST ClassParamList;       /* List of Signature nodes */
+         /* List of the actual classes corrspnding to formal class params */  
+         AST InheritList;          /* List of Class for inherited classes */
+         AST ExtendList;           /* List of Class for extended classes */
+         AST InvarList;
+         AST AttributeList;
+         AST Ancestors;            /* list of all ancestors of this class */
+         AST Uses;                 /* The classes of all variables used in */
+                                   /* stmts of all methods */
+         Boolean ClassHasSpecial;  /* true if the class has any special methods */
+      } Class;
+
+      /* A type has a name and a list of arguments, which are themselves
+        types. E.g. Array[Table[Int String]]. */
+
+      struct {
+         HashIndex TypeName;     /* Type name */
+         AST TypeArgList;        /* List of Type containing arguments */
+      } Type;
+
+      struct {
+          HashIndex SigId;
+          AST SigType;
+          AST SigOriginalType;   /* Never altered by type substitution */
+          int StackOffset;
+      } Signature;
+
+      /* Instance variable descriptor. */
+
+      struct {
+         StringPtr VarComment;   /* Comment following variable */
+         AST VarType;            /* Type node giving the type of the
+                                    variable */
+         Boolean VarPublic;      /* True if this is a public variable */
+         AttriSrc AttributeSource;
+         AST SourceClass;
+      } Var;
+
+      /* Method descriptor. */
+
+      struct {
+         Boolean MethPublic;     /* True if this is a public method */
+         MethodType MethKind;    /* One of method or cons */
+         HashIndex MethName;     /* Method name */
+         StringPtr MethComment;  /* Comment following header */
+         AST Result;
+         AST MethOriginalResult; /* never altered by SA */
+         AST MethLocalList;  /* List of Local local var descriptors         */
+         AST MethParamList;  /* This is a pointer into the MethLocalList 
+                                where the parameters start (not sep. list)  */
+         AST Require;        /* Require part of a method  */
+         AST Ensure;         /* Ensure part of a method   */
+         AST Body;           /* List of statement nodes   */
+         BodyType MethBodyType;  /* What kind of body does this method have */
+         AST DefinedBy;      /* Set by the SA */
+         AST ImplementedBy;  /* Set by the SA */
+         int LocalCount;     /* Number of local variables */
+         int ParamCount;     /* Number of parameters      */
+         AttriSrc AttributeSource;
+         BodyType FromBodyType;	/* The true body type of a from body */
+      } Method;
+
+      /* Local variable descriptor. Local variables include parameters,
+        result, self, and declared local variables. */
+
+      struct {
+         HashIndex LocName;      /* Local variable name */
+         AST LocType;            /* Type node giving type of variable */
+      } Local;
+
+      struct {
+         HashIndex Id;
+         IdenType IdenKind;
+         int LocDisp;            /* Stack displacement if a local        */
+         AST IdenType;           /* type of this id filled in by the AST */
+       } Iden;
+
+      /* The next group of nodes represent statements. */
+
+      /* Assignment statement: LHS := RHS. LHS is always a local
+         variable or self instance var */
+
+      struct {
+         AST AssignVar;          /* LHS Identifier node    */
+         AST AssignExpr;         /* RHS expression subtree */
+      } Assign;
+
+      /* If statement */
+      struct {
+         AST IfPairList;         /* List of IfPair nodes */
+         AST IfElse;             /* List of statements in the else part */
+      } If;   
+
+      /* A pair consisting of an expression E and a list of statements S,
+         corresponding to "if E then S" or "elsif E then S". */
+      struct {
+         AST PairExpr;           /* Bool expression    */
+         AST PairStmts;          /* List of statements */
+      } IfPair;
+
+      /* A controlled loop:
+         "from S until E while E do S od". */
+      struct {
+         AST FromStmts;           /* List of initialization statements */
+         AST UntilCond;          /* Bool expression */
+         AST WhileCond;          /* Boolean expression */
+         AST LoopStmts;       /* List of loop statements */
+      } Loop;
+
+      /* Attempt statement:
+          attempt S handlers end */
+      struct {
+         AST AttStmtList;        /* List of statements to be attempted */
+         AST AttHandlerList;     /* List of Handler exception handlers */
+      } Attempt;
+
+      /* An exception handler:  var:type statements. */
+      struct {
+         AST HandlerVar;         /* Local node for handler variable */
+         AST HandlerStmtList;    /* List of statements for handler  */
+      } Handler;
+
+      /* Signal statement */
+      struct {
+        AST SignalExpr;         /* Expression node for exception object */
+      } Signal;
+
+      /* An application node can occur either as a statement or an expr. */
+      struct {
+         AST Receiver;           /* Either an Apply node or an Iden node  */
+         HashIndex AttrName;     /* Name of the method in the application */
+         IdenType AttrKind;      /* can only be InstVar, Method or Cons   */
+         AST AttrType;           /* static class of the attribute         */
+         AST ApplyList;          /* List of expressions: the arguments    */
+      } Apply;
+
+      /* The following nodes represent expressions. */
+
+      /* The expression "undefined Expr". */
+      struct {
+         AST UndefExpr;         /* Expression node */
+      } Undef;
+
+      /* A boolean literal: either TRUE or FALSE. */
+      struct {
+         Boolean BoolVal;
+      } Bool;
+
+      /* A numeric literal which may be an Int or a Float. */
+      struct {
+         NumberType NumKind;     /* an int or a float              */
+         int IntVal;             /* if int, here's the real value  */
+         double DoubleVal;       /* if float,          "           */
+         unsigned char ByteVal;
+         StringPtr NumVal;       /* String representation of value */
+      } Num;
+
+      /* A string literal */
+      struct {
+         StringPtr StrVal;
+      } String;
+
+   } Tag;
+
+};  /* ASTNode */
+
+
+#endif
+\end{verbatim}}
+
+\chapter{Class Int Implementation}
+
+
+The Dee source the the class {\tt Int}.
+
+
+\setspacing{1}{
+\begin{verbatim}
+class Int
+
+-- The basic class whose instances are integers.
+
+inherits Ring Order Index
+
+public method get 
+-- temp way to read an int from the keyboard (does not create the int first)
+  special
+
+public method print
+-- temp way to print an int
+  special
+
+public method show : String
+-- temp way to print an int
+  special
+
+public method maxint: Int
+-- Return the largest integer that can be represented.
+  begin
+    result := 2147483647
+  end
+
+public method = (other: Int): Bool
+-- Return true iff the receiver is integer equal to the argument.
+  special
+
+public method zero: Int
+-- Return the integer value 0.
+  begin
+    result := 0
+  end
+
+public method one: Int
+-- Return the integer value 1.
+  begin
+    result := 1
+  end
+
+public method + (other: Int): Int
+-- Return the integer sum of the receiver and the argument.
+  special
+
+public method - (other: Int): Int
+-- Return the integer difference of the receiver and the argument.
+  special
+
+public method * (other: Int): Int
+-- Return the integer product of the receiver and the argument.
+  special
+
+public method / (other: Int): Int
+-- Return the integer quotient of the receiver and the argument. System
+-- exception if the argument is zero.
+  special
+
+public method mod (other: Int): Int
+-- Return the integer modulus of the receiver and the argument. System
+-- exception if the argument is zero.
+  special
+
+public method < (other: Int): Bool
+-- Return true iff the receiver is integer less than the argument.
+  special
+
+public method float: Float
+-- Return a floating point number with the same value as the receiver.
+  special
+
+public method char: String
+-- Return a one-character string consisting of the ASCII character whose
+-- code is the receiver. Exception if the receiver is outside the range
+-- [0..255].
+  special
+
+public method abs: Int
+-- Return the absolute value of the receiver.
+  begin
+    if self >= 0
+      then result := self
+      else result := 0 - self
+    fi
+  end
+
+public method gcd (y: Int): Int
+-- Return the greatest common divisor of the receiver and the argument.
+--  Exception 101 if either argument is zero.
+  var x: Int
+      rem: Int
+  begin
+    if (self = 0) or (y = 0)
+      then signal 101
+    fi
+    x := self.abs
+    y := y.abs
+    from until y = 0 do
+      rem := x mod y
+      x := y
+      y := rem
+    od
+    result := x
+  end
+\end{verbatim}}
+
+
+
+
+The implentation of the special methods of class {\tt Int}.
+
+\setspacing{1}{
+\begin{verbatim}
+/*
+  Special Dee instructions for class Int
+*/
+
+#include "CeeGlob.h"
+
+
+extern int _ClassTableIndex_Int;
+extern int _ClassTableIndex_Float;
+
+
+
+void Int_print(osp)
+     int osp;
+{
+  printf( "%d\n", (os[osp+1] -> Tag.Int) );
+}
+
+void Int_get(osp)
+     int osp;
+{
+  scanf( "%d", &(os[osp+1] -> Tag.Int) );
+  os[osp] = os[osp+1];
+}
+
+
+void Int__eq( osp )
+     int osp;
+{
+ if ( os[osp+1] -> Tag.Int == os[osp+2] -> Tag.Int )
+   os[osp] = true_object;
+ else
+   os[osp] = false_object;
+}
+
+
+void Int_char( osp )
+     int osp;
+{
+  char s[2] = " ";
+  *s = (char) os[osp+1] -> Tag.Int;
+  os[osp] = create_string( s, hwm );
+}
+
+void Int_show( osp )
+     int osp;
+{
+  char buf[20];
+
+  sprintf( buf, "%ld", os[osp+1]->Tag.Int );
+
+  os[osp] = create_string( buf, hwm );
+}
+
+
+void Int__plus( osp )
+     int osp;
+{
+  os[osp] = CreateInstance( _ClassTableIndex_Int, hwm );
+
+  os[osp] -> Tag.Int = os[osp+1] -> Tag.Int + os[osp+2] -> Tag.Int;
+}
+
+
+void Int__minus( osp )
+     int osp;
+{
+  os[osp] = CreateInstance( _ClassTableIndex_Int, hwm );
+
+  os[osp] -> Tag.Int = os[osp+1] -> Tag.Int - os[osp+2] -> Tag.Int;
+}
+
+
+void Int__mul( osp )
+     int osp;
+{
+  os[osp] = CreateInstance( _ClassTableIndex_Int, hwm );
+
+  os[osp] -> Tag.Int = os[osp+1] -> Tag.Int * os[osp+2] -> Tag.Int;
+}
+
+
+void Int__div( osp )
+     int osp;
+{
+  os[osp] = CreateInstance( _ClassTableIndex_Int, hwm );
+
+  os[osp] -> Tag.Int = os[osp+1] -> Tag.Int / os[osp+2] -> Tag.Int;
+}
+
+
+void Int__mod( osp )
+     int osp;
+{
+  os[osp] = CreateInstance( _ClassTableIndex_Int, hwm );
+
+  os[osp] -> Tag.Int = os[osp+1] -> Tag.Int % os[osp+2] -> Tag.Int;
+}
+
+
+
+void Int__ne( osp )
+     int osp;
+{
+ if ( os[osp+1] -> Tag.Int != os[osp+2] -> Tag.Int )
+   os[osp] = true_object;
+ else
+   os[osp] = false_object;
+}
+
+
+void Int__lt( osp )
+     int osp;
+{
+ if ( os[osp+1] -> Tag.Int < os[osp+2] -> Tag.Int )
+   os[osp] = true_object;
+ else
+   os[osp] = false_object;
+}
+
+
+
+void Int__gt( osp )
+     int osp;
+{
+ if ( os[osp+1] -> Tag.Int > os[osp+2] -> Tag.Int )
+   os[osp] = true_object;
+ else
+   os[osp] = false_object;
+}
+
+
+
+void Int__ge( osp )
+     int osp;
+{
+ if ( os[osp+1] -> Tag.Int >= os[osp+2] -> Tag.Int )
+   os[osp] = true_object;
+ else
+   os[osp] = false_object;
+}
+
+
+void Int__le( osp )
+     int osp;
+{
+ if ( os[osp+1] -> Tag.Int <= os[osp+2] -> Tag.Int )
+   os[osp] = true_object;
+ else
+   os[osp] = false_object;
+}
+
+
+
+
+void Int_float( osp )
+     int osp;
+{
+  os[osp] = CreateInstance( _ClassTableIndex_Float, hwm );
+  os[osp] -> Tag.Float = (double) os[osp+1] -> Tag.Int;
+}
+
+\end{verbatim}}
