@@ -1,4 +1,6 @@
-\documentstyle[cuthesis]{report}
+\documentclass{report}
+
+\usepackage{cuthesis}
 
 \author{Everton da S. Maldonado}
 \title {Identifying Self-Admitted Technical Debt Using Natural Language Processing Techniques}
@@ -22,17 +24,41 @@ Second, we leverage the knowledge obtained in our first study to present an appr
 \begin{acknowledgments}
 At the conclusion of a stage, you must look back and take the time to thank and to be grateful for those who have been by our side, because happiness is meaningless without someone to share. In particular, I am grateful to God who gives me strength, guidance and above all the opportunity to pursue my masters degree. 
 
-I would like to express my gratitude to my supervisor Dr. Emad Shihab for his support and dedication during this last two years. Thank you Emad for believing in my potential, for teaching me how to overcome my limitations and that, through hard work, everything is achievable. I must tell you that it has been quite an enjoyable adventure, and that a learned a lot from you. You are a role model for me.
+I would like to express my gratitude to my advisor Dr. Emad Shihab for his support and dedication during this last two years. Thank you Emad for believing in my potential, for teaching me how to overcome my limitations and that, through hard work, everything is achievable. I must tell you that it has been quite an enjoyable adventure, and that I learned a lot from you. 
 
-I also would like to thank all my lab mates Moiz Arif, Davood Mazinanian, Ahmad Hassan, Samuel Donadelli, Shahriar Rostami, Rabe Abdalkareem and everyone else that I had the opportunity to work with. All of you are very special for me, and made this experience so much more enjoyable. In particular, I would like to thank Dr. Nikolaos Tsantalis 
+Apart from my advisor, I would also like to thank my thesis examiners, Dr. X and Dr. Y, for taking the time to read my thesis and for their valuable suggestions. I would like to thank Dr. Nikolaos Tsantalis for his help in my research, as well as all other faculty members of the Department of Computer Science and Software Engineering, for providing the necessary guidance.
 
-Pursuing this degree while adapting to a new life in a new country was a least challenging, 
+I also would like to thank all my lab mates and everyone else that I had the opportunity to work with. A special thanks to Moiz Arif, Davood Mazinanian, Ahmad Hassan, Samuel Donadelli, Rabe Abdalkareem and Shahriar Rostami. All of you made this experience so much more enjoyable. 
 
+More than anyone else, I would like to thank my wife Fabiana Maldonado. It was your love, continued support and encouragement that made this degree possible. You are more than I could wish for. Also, during this journey, I was very fortunate to count with so many dear friends. I would like to thank Eduardo Lomonaco, K\^{e}nia Balestra, Rodrigo Mayer, Luciana Schurt, Carlos and Antonia Lorenz for being always here for me. 
+
+To my mon, dad, brothers and grandparents that, although far away are aways feeling my heart with their love. I dedicate this thesis for you.
 \end{acknowledgments}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Body of Thesis goes here.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+\label{introduction}
+\input{introduction.tex}
+
+\chapter{Background and State of the Art}
+\label{background}
+\input{background.tex}
+
+\chapter{Analyzing Source Code Comments and Different Types of Self-Admitted Technical Debt}
+\label{background}
+\input{chapter3.tex}
+
+\chapter{Proposing an Approach to Automatically Identify Self-Admitted Technical Debt}
+\label{background}
+\input{chapter4.tex}
+
+
+% \section{Approach}
+% \label{sec:approach}
+% \input{approach}
+
+% \section{Case study Results}
+% \label{sec:case_study_results}
+% \input{results}
 
 \addcontentsline{toc}{chapter}{Bibliography}
 %\bibliography{abbr,chalin,common,larch,tn}  %place your .bib files here
