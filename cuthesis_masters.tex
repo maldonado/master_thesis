@@ -1,13 +1,41 @@
 \documentclass{report}
 
+\usepackage{url}
 \usepackage{cuthesis}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{csquotes}
+
 
 \author{Everton da S. Maldonado}
 \title {Identifying Self-Admitted Technical Debt Using Natural Language Processing Techniques}
 \degree{Master of Applied Science in Software Engineering}
 \dept  {Computer Science and Software Engineering}
 
+\textwidth 15.2cm %6.0in  %468pt
+\textheight 22.0cm %9.0in  %648pt
+\headheight = 0.0cm
+\headsep = 0.0cm
+\topmargin = 0.0cm
+% \footheight = 0.0cm
+\footskip = 1.0cm
+\baselineskip=4ex
+
 \newcommand{\SATD}{self-admitted technical debt}
+
+\newcommand{\chapthertreerqi}{\textbf{RQ: What are the types of self-admitted technical debt? How frequent are the different types of self-admitted technical debt in the studied projects ?}}
+
+\newcommand{\conclusionbox}[1]{%
+    \vspace{6mm}
+    \framebox[0.95\textwidth][c]{%
+        \parbox[b]{0.92\textwidth}{%
+            {\it #1}
+        }
+    }
+    \vspace{6mm}
+}
+
 
 \begin{document}
 
@@ -32,7 +60,7 @@ I also would like to thank all my lab mates and everyone else that I had the opp
 
 More than anyone else, I would like to thank my wife Fabiana Maldonado. It was your love, continued support and encouragement that made this degree possible. You are more than I could wish for. Also, during this journey, I was very fortunate to count with so many dear friends. I would like to thank Eduardo Lomonaco, K\^{e}nia Balestra, Rodrigo Mayer, Luciana Schurt, Carlos and Antonia Lorenz for being always here for me. 
 
-To my mon, dad, brothers and grandparents that, although far away are aways feeling my heart with their love. I dedicate this thesis for you.
+To mom, dad, my brothers and grandparents that, although far away are aways feeling my heart with their love. I dedicate this thesis for you.
 \end{acknowledgments}
 
 \chapter{Introduction}
@@ -44,24 +72,19 @@ To my mon, dad, brothers and grandparents that, although far away are aways feel
 \input{background.tex}
 
 \chapter{Analyzing Source Code Comments and Different Types of Self-Admitted Technical Debt}
-\label{background}
+\label{chapter3}
 \input{chapter3.tex}
 
 \chapter{Proposing an Approach to Automatically Identify Self-Admitted Technical Debt}
-\label{background}
+\label{chapter4}
 \input{chapter4.tex}
 
+\chapter{Conclusions}
+\label{conclusion}
+\input{conclusion.tex}
 
-% \section{Approach}
-% \label{sec:approach}
-% \input{approach}
-
-% \section{Case study Results}
-% \label{sec:case_study_results}
-% \input{results}
 
 \addcontentsline{toc}{chapter}{Bibliography}
-%\bibliography{abbr,chalin,common,larch,tn}  %place your .bib files here
-%\bibliographystyle{alpha}                   %the bibliography style to use
-
+\bibliography{bibliography.bib}  
+\bibliographystyle{alpha}
 \end{document}

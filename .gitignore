@@ -14,3 +14,9 @@
 
 *.fdb_latexmk
 *.fls
+
+
+cuthesis_masters.lof
+cuthesis_masters.lot
+cuthesis_masters.pdf
+cuthesis_masters.toc
