@@ -2,7 +2,7 @@
 
 In this chapter we will present related work on technical debt. These studies sets the current background of Technical Debt. More specifically, the technical debt studies presented in this chapter can be grouped in three main themes. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. 
 
-\section{Defining and Expanding Technical Debt}
+\section{Defining and Expanding Technical Debt Metaphor}
 \label{defining_and_extending_technical_debt}
 
 In the early days of technical debt most information were available on blogs written by acknowledgeable industry related writers. After the advent of Agile Methodologies, the term gained more power and became more popular. Nowadays, academia and industry alike study the applications of the technical debt metaphor.
@@ -41,3 +41,25 @@ Therefore, McConnell presents the following \textbf{taxonomy for technical debt}
 \end{enumerate}
 
 \subsection{Technical Debt Quadrant}
+
+On the other hand, Fowler definition of technical debt is slight different, and it is represented by four quadrants namely reckless, prudent, deliberate and inadvertent. According to Fowler debt can be any combination of these four quadrants. 
+
+For example, prudent deliberate debt is the one that the team knows they are taking on a debt, and thus puts some thought as to whether the payoff for an earlier release is greater than the costs of paying it off. However, a team not aware of design practices is taking on its reckless debt without even realizing how much hack it's getting into (inadvertent). Although reckless debt may not be inadvertent. A team may know about good design practices, but decide to go ``quick and dirty'' because they think they can not afford the time required to write clean code. The fourth cell of the quadrant is prudent/inadvertent debt. This case represent the case where a skilled development team is creating a project applying the best design to handle the current requirements, however over time, the chosen design proves to be inadequate to the future need of the project. Fowler points out that the point is that while you are programming, you are also learning. It is often the case that it can take a year of programming on a project before you understand what the best design approach should have been.  
+
+ 
+\begin{figure*}[thb!]
+  \centering
+  \vspace{5mm}
+  \includegraphics[width=1\textwidth]{figures/literature_review/technical_debt_quadrant.png}
+  \caption{Technical Debt Quadrant}
+  \label{fig:technical_debt_quadrant}
+\end{figure*}
+
+
+Figure \ref{fig:technical_debt_quadrant} presents the actual technical debt quadrant, and illustrates on each cell the possible cases that can happen with a development team while working on a software project. 
+
+ 
+
+
+
+
