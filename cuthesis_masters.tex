@@ -1,28 +1,19 @@
 \documentclass{report}
 
 \usepackage{url}
+\usepackage{xspace}
 \usepackage{cuthesis}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{csquotes}
 
-
 \author{Everton da S. Maldonado}
 \title {Identifying Self-Admitted Technical Debt Using Natural Language Processing Techniques}
 \degree{Master of Applied Science in Software Engineering}
 \dept  {Computer Science and Software Engineering}
 
-\textwidth 15.2cm %6.0in  %468pt
-\textheight 22.0cm %9.0in  %648pt
-\headheight = 0.0cm
-\headsep = 0.0cm
-\topmargin = 0.0cm
-% \footheight = 0.0cm
-\footskip = 1.0cm
-\baselineskip=4ex
-
-\newcommand{\SATD}{self-admitted technical debt}
+\newcommand{\SATD}{self-admitted technical debt\xspace}
 
 \newcommand{\chapthertreerqi}{\textbf{RQ: What are the types of self-admitted technical debt? How frequent are the different types of self-admitted technical debt in the studied projects ?}}
 
@@ -67,9 +58,9 @@ To mom, dad, my brothers and grandparents that, although far away are aways feel
 \label{introduction}
 \input{introduction.tex}
 
-\chapter{Background and State of the Art}
-\label{background}
-\input{background.tex}
+\chapter{Literature Review}
+\label{literature_review}
+\input{literature_review.tex}
 
 \chapter{Analyzing Source Code Comments and Different Types of Self-Admitted Technical Debt}
 \label{chapter3}

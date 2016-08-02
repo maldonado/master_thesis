@@ -1,0 +1,43 @@
+% -*- root: cuthesis_masters.tex -*-
+
+In this chapter we will present related work on technical debt. These studies sets the current background of Technical Debt. More specifically, the technical debt studies presented in this chapter can be grouped in three main themes. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. 
+
+\section{Defining and Expanding Technical Debt}
+\label{defining_and_extending_technical_debt}
+
+In the early days of technical debt most information were available on blogs written by acknowledgeable industry related writers. After the advent of Agile Methodologies, the term gained more power and became more popular. Nowadays, academia and industry alike study the applications of the technical debt metaphor.
+
+The metaphor \textit{technical debt} was introduced by Ward Cunningham~\cite{Cunningham1992WPM} more than two decades ago to facilitate the communication between developers and non-technical personal working on the same software project. Cunningham explains how ``not quite right code'' will affect the maintainability of a project (i.e., require more effort to maintain the project in the future) as interest does on debt. 
+
+In other words, every time that a implementation around the code affected by the not optimal implementation is needed an interest in form of more effort will be expend in the task, and how debt can speed up the project until there is so much accumulated debt that brings the project to a standstill. This term also provide managers the insight of why it can be beneficial to use resources to enhance a particular portion of the code even if it is not broken.
+
+The term has been refined and expanded since, notably by Steve McConnell~\cite{McConnell07:TechnicalDebt} in his taxonomy and by Martin Fowler~\cite{MartinFowler:TechnicalDebtQuadrant} with his four quadrants. 
+
+\subsection{Unintentionally incurred debt vs. Intentionally incurred debt}
+
+According to Steve McConnell, technical debt can be divided into two main kinds: \textit{unintentionally incurred debt} and \textit{intentionally incurred debt}.
+
+Examples of unintentionally incurred debt ranges from a design approach that just turns out to be error-prone to a junior programmer who  write bad code. This technical debt is the non-strategic result of doing a poor job. In some cases, this kind of debt can be incurred unknowingly, for example, when a company acquire another company that has accumulated technical debt over the years. 
+
+The second kind of technical debt, incurred intentionally, commonly occurs when an organization makes a conscious decision to optimize for the present rather than for the future. An ``If we do not get this release done on time, there will not be a next release'' type of situation. This leads to decisions like, ``We do not have time to reconcile these two databases, so we will write some glue code that keeps them synchronized for now and reconcile them after we ship.'' Or ``We have some code written by a contractor that does not follow our coding standards; we will clean that up later.'' Or ``We did not have time to write all the unit tests for the code we wrote the last 2 months of the project. We'll right those tests after the release''. 
+
+Moreover, technical debt incurred intentionally can be of two types: short-term and long term debt. Like with real debt, short-term debt is expected to be paid off frequently. Short-term debt is taken on tactically and reactively, usually as a late-stage measure to get a specific release out the door, whereas long term debt is taken on strategically and pro-actively. For example, ``We do not think we are going to need to support a second platform for at least five years, so this release can be built on the assumption that we are supporting only one platform''.
+
+The implication is that short-term debt should be paid off quickly, perhaps as the first part of the next release cycle, whereas long-term debt can be carried for a few years or longer.
+
+Therefore, McConnell presents the following \textbf{taxonomy for technical debt} to summarize his thoughts on technical debt:
+
+\begin{enumerate}
+    \item - Debt incurred \textbf{unintentionally} due to low quality work
+    \item - Debt incurred \textbf{intentionally}
+    \begin{enumerate}
+        \item - \textbf{Short-term debt}, usually incurred reactively, for tactical reasons
+        \begin{enumerate}
+            \item - Focused Short-Term Debt. Individually identifiable shortcuts (like a car loan)
+            \item - Unfocused Short-Term Debt. Numerous tiny shortcuts (like credit card debt)
+        \end{enumerate}
+        \item - \textbf{Long-term debt}, usually incurred pro actively, for strategic reasons
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Technical Debt Quadrant}
