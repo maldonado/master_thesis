@@ -14,7 +14,6 @@ Recently, Potdar and Shihab~\cite{Potdar2014ICSME} developed an approach to iden
 Therefore, in this chapter we examine and quantify the different types of self-admitted technical debt. To do so, we extract source code comments from 5 well commented open source projects that belongs to different application domains, namely Apache Ant, Apache Jmeter, ArgoUml, Columba and JFreeChart. In total, we examined more than 166K comments. We applied a set of 4 simple filtering heuristics to remove comments that are not likely to contain self-admitted technical debt (e.g., license comments, commented source code, Javadoc comments). Finally, these filtering heuristics resulted in a dataset of 33,093 comments that the first author manually analyzed and classified into different types of self-admitted technical debt.
 
 When classifying the code comments, we found 5 types of self-admitted technical debt which are: design debt, defect debt, documentation debt, requirement debt and test debt. Analyzing the distribution of the comments we found that the most common type of self-admitted technical debt is design debt, making up between 42\% - 84\% of all the classified comments. In addition to our findings, we contribute a rich dataset of self-admitted technical making the data used in this study publicly available. To the best of our knowledge, there is not similar data available and we believe that the dataset will encourage future research in the area of self-admitted technical providing the necessary foundation for more advanced techniques as Natural Language Processing.  
-% \footnote{\url{http://users.encs.concordia.ca/~e_silvam/publications.html}}
 
 The rest of the chapter is organized as follows. Section \ref{chap3:sec:related_work} presents related work. We describe our approach and setup our case study in Section \ref{chap3:sec:approach}. Section \ref{chap3:sec:results} presents the case study results. The threats to validity are presented in Section \ref{chap3:sec:threats_to_validity} and in Section \ref{chap3:sec:conclusion} concludes the chapter and discusses future work. 
 
@@ -24,7 +23,7 @@ Our work uses code comments to classify self-admitted technical debt. Therefore,
 
 \subsection{Source Code Comments}
 
-A number of studies examined the co-evolution of source code comments and the rationale for changing code comments. For example, Fluri \textit{et al.}~\cite{Fluri2007WCRE} analyzed the co-evolution of source code and code comments, and found that 97\% of the comment changes are consistent. Tan \textit{et al.}~\cite{Tan2012ICST} proposed a novel approach to identify inconsistencies between Javadoc comments and method signatures. Malik \textit{et al.} \cite{Malik2008ICSM} studied the likelihood of a comment to be updated and found that call dependencies, control statements, the age of the function containing the comment, and the number of co-changed dependent functions are the most important factors to predict comment updates.
+A number of studies examined the co-evolution of source code comments and the rationale for changing code comments. For example, Fluri \textit{et al.}~\cite{Fluri2007WCRE} analyzed the co-evolution of source code and code comments, and found that 97\% of the comment changes are consistent. Tan \textit{et al.}~\cite{Tan2012ICST} proposed a novel approach to identify inconsistencies between Javadoc comments and method signatures. Malik \textit{et al.}~\cite{Malik2008ICSM} studied the likelihood of a comment to be updated and found that call dependencies, control statements, the age of the function containing the comment, and the number of co-changed dependent functions are the most important factors to predict comment updates.
 
 Other work used code comments to understand developer tasks. For example, Storey \textit{et al.}~\cite{Storey2008ICSE} analyzed how task annotations (e.g., TODO, FIXME) play a role in improving team articulation and communication. The work closest to ours is the work by Potdar and Shihab~\cite{Potdar2014ICSME}, where code comments were used to identify technical debt. 
 
@@ -47,13 +46,13 @@ Our work is different from the aforementioned work that uses code smells to dete
   \centering
   \includegraphics[width=1\textwidth]{figures/chapter3/approach.pdf}
   \caption{Approach overview}
-  \label{fig:approach}
+  \label{chap3:fig:approach}
 \end{figure*}
 
 \begin{table*}[!hbt]
       \begin{center}
             \caption{Project Details}
-            \label{tab:project_details}
+            \label{chap3:tab:project_details}
             \begin{tabular}{l| c c r c c }
             \toprule
             \textbf{Project}   & \textbf{Release}  & \textbf{\# of classes}   & \textbf{SLOC}    & \textbf{\# of comments}  & \textbf{\# of contributors} \\ \midrule 
@@ -66,24 +65,24 @@ Our work is different from the aforementioned work that uses code smells to dete
       \end{center}
 \end{table*}
 
-The main goal of our study is to identify and quantify the different types of self-admitted technical debt found in source code comments. Figure \ref{fig:approach} shows an overview of our approach, and the following subsections detail each step of it.
+The main goal of our study is to identify and quantify the different types of self-admitted technical debt found in source code comments. Figure \ref{chap3:fig:approach} shows an overview of our approach, and the following subsections detail each step of it.
 
 \subsection{Project Data Extraction} 
-\label{sub:project_data_extraction}
+\label{chap3:sub:project_data_extraction}
 
 To perform our study, we obtain the source code of five open source projects, namely Apache Ant, Apache Jmeter, ArgoUML, Columba and JFreeChart. We chose the aforementioned projects, since they belong to different application domains, and vary in size (e.g., SLOC), and in the number of contributors.
 
-Table \ref{tab:project_details} provides statistics about each one of the projects used in our study. We provide details about the release used, the number of classes, the total source lines of code (SLOC), the total extracted comments and the number of contributors. A source line of code contain at least one valid character, which is not blank spaces or source code comments. In our study, we only use the Java files to calculate the SLOC, and to do so, we use the tool SLOCCount \cite{wheeler2004:home}. 
+Table \ref{chap3:tab:project_details} provides statistics about each one of the projects used in our study. We provide details about the release used, the number of classes, the total source lines of code (SLOC), the total extracted comments and the number of contributors. A source line of code contain at least one valid character, which is not blank spaces or source code comments. In our study, we only use the Java files to calculate the SLOC, and to do so, we use the tool SLOCCount \cite{wheeler2004:home}. 
 
 The number of contributors was extracted from OpenHub, an on-line community and public directory that offers analytics, search services and tools for open source software \cite{Openhub:home}. It is important to notice that the number of comments shown for each project does not represent the number of commented lines, but rather the number of individual line, block, and Javadoc comments. In total, we obtained more than 166,756 comments, found in 8,041 Java classes.
  
 \subsection{Parse Source Code} 
-\label{sub:parse_source_code}
+\label{chap3:sub:parse_source_code}
 
 After obtaining the source code of all projects, we extract the comments from their source code. We use JDeodorant \cite{Tsantalis2008CSMR}, an open-source Eclipse plug-in, to parse the source code and extract the code comments. JDeodorant is capable of identify design flaws (i.e., bad smells) in Java projects, and suggest refactoring opportunities to solve them. JDeodrant uses the Eclipse AST framework to create an Abstract Syntax Tree (AST) map of the source code. The AST map contains detailed information about the project such as: the source code comments, its type (i.e., Block, Single-line or Javadoc), the line where each one of these comments begins and finishes. We extract the aforementioned information and store all comments in a relational database to facilitate the processing of the data.
 
 \subsection{Filter Comments} 
-\label{sub:filter_comments}
+\label{chap3:sub:filter_comments}
 
 Source code comments can be used for different purposes in a project like giving context, as part of the documentation, to express thoughts, opinions and authorship, and in some cases, to remove source code from the program. Comments are used freely for developers and with few formalities, if any at all. This informal environment allows developers to bring to light opinions, insights and even confessions (e.g., self-admitted technical debt). 
 
@@ -99,12 +98,12 @@ Similarly, is common to find commented source code across the projects, and this
 
 Lastly, when analyzing Javadoc comments we found that they rarely mention self-admitted technical debt. For the Javadoc comments that does mention self-admitted technical debt we notice that they usually contains one of the task-reserved words (i.e., ``todo'', ``fixme'', or ``xxx''). Based on this, our heuristic remove all comments of the type Javadoc unless they contain at least one of the task-reserved words. To do so, we create a simple regular expression that search for the task-reserved words before removing the comment.  
 
-The steps mentioned above significantly reduced the number of comments in our dataset and helped us focus on the most applicable and insightful comments. For example, in the Apache Ant project, applying the above steps helped reduce the number of comments from 21,587 to 4,140 comments meaning that 19.17\% of the comments were kept for analysis. Table \ref{tab:filtering_heuristics_details} provides details for each one of the projects.
+The steps mentioned above significantly reduced the number of comments in our dataset and helped us focus on the most applicable and insightful comments. For example, in the Apache Ant project, applying the above steps helped reduce the number of comments from 21,587 to 4,140 comments meaning that 19.17\% of the comments were kept for analysis. Table \ref{chap3:tab:filtering_heuristics_details} provides details for each one of the projects.
 
 \begin{table}[!hbt]
       \begin{center}
             \caption{Filtering heuristics details}
-            \label{tab:filtering_heuristics_details}
+            \label{chap3:tab:filtering_heuristics_details}
             \begin{tabular}{l| p{0.55in} p{0.75in} p{0.75in} }
             \toprule
             \thead{\textbf{Project}}   & \textbf{Total \# of comments}  & \textbf{\# of comments after filtering} & \textbf{\%  of TD-related comments}\\ \midrule 
@@ -118,7 +117,7 @@ The steps mentioned above significantly reduced the number of comments in our da
 \end{table}
 
 \subsection{Manual Classification} 
-\label{sub:manual_classification}
+\label{chap3:sub:manual_classification}
 
 To classify the comments, we developed a Java based tool that shows one comment at a time and gives a list of possible classifications that can be manually assigned to the comment. The list of possible classifications is based on previous work by Alves \textit{et al.}~\cite{Alves2014MTD}. After applying the different filtering steps, we successfully classified 33,093 comments. The more than 33 thousand comments were classified into five different types of self-admitted technical debt, i.e., design debt, defect debt, documentation debt, requirement debt and test debt.
 
@@ -130,7 +129,7 @@ The first author who made the classification has more than 8 years of experience
 The goal of our study is to classify and quantify the different types of self-admitted technical debt. To do so, we divide our study in two parts first, we manually read trough all comments identifying self-admitted technical debt among them. Once identified, the self-admitted technical debt, is classified into different types. Second, we quantify these comments identifying the most common types. Our case study is formalized with the following research question:
 
 \vspace{3mm}
-\noindent\chapthertreerqi
+\noindent\chapterIIIrqi
 \vspace{3mm}
 
 \noindent\textbf{Motivation:} As shown in previous work \cite{Potdar2014ICSME}, self-admitted technical can be an indicator of non-optimal solutions. However, technical debt is a general term, and there are many different types of technical debt \cite{Alves2014MTD}. Although we know that self-admitted technical exists, the different types of self-admitted technical debt are still unknown. For example, are we able to detect documentation debt from code comments? Answering this question is important as different types of debt have different approaches to be solved, and therefore each different type may need a tailored solution. It also helps us understand the opportunities and limitations of using code comments to detect technical debt. 
@@ -254,7 +253,7 @@ After classifying the comments, we notice that not all of the types mentioned in
   \includegraphics[width=0.87\textwidth]{figures/chapter3/technical_debt_distribution.pdf}
   \vspace{-3mm}
   \caption{Self-admitted technical debt types distribution}
-  \label{fig:satd_distribution}
+  \label{chap3:fig:satd_distribution}
 \end{figure*}
 
 In addition to determining the different type of self-admitted technical debt, we would like to quantify the different types. Doing so will help us understand the strengths and weaknesses of using code comments to detect technical debt. After analyzing the more than 33K comments, we found that only 2,457 comments are self-admitted technical debt comments, representing 7.42\% (i.e., $\frac{2457}{33093}$) of all the classified comments. The percentage of self-admitted technical debt found for each project is presented in Table~\ref{tab:total_self_admitted_per_project}. ArgoUml is the project with the highest percentage of self-admitted technical debt and Apache Ant has the lowest percentage, amounting to 16.8\% and 3.2\% respectively.
@@ -275,9 +274,9 @@ In addition to determining the different type of self-admitted technical debt, w
      \end{center}
 \end{table}
 
-Figure \ref{fig:satd_distribution} shows the percentage of each type of self-admitted technical debt across the projects. Since each project has a different number of comments we normalized the data, presenting the percentages of the different types rather than the raw numbers. For example, if a project has 100 self-admitted technical debt comments and 10 where design debt type, we say that the project has 10\% of self-admitted design technical debt. 
+Figure \ref{chap3:fig:satd_distribution} shows the percentage of each type of self-admitted technical debt across the projects. Since each project has a different number of comments we normalized the data, presenting the percentages of the different types rather than the raw numbers. For example, if a project has 100 self-admitted technical debt comments and 10 where design debt type, we say that the project has 10\% of self-admitted design technical debt. 
 
-Analyzing the Figure \ref{fig:satd_distribution} we find that self-admitted design debt is the most common in 4 out of 5 projects. Self-admitted design technical debt values ranged from 42\%, in Columba project with the lowest percentage, to 84\% in Jmeter and JFreeChart, projects with the highest percentage. The second most frequent type is self-admitted requirement debt with values between 5\% and 45\%, followed by self-admitted defect technical debt making up between 4\% to 9\% of the comments. Self-admitted test technical debt ranged from 0\% to 7\% whereas self-admitted documentation debt had only 0\% to 5\% of the comments.     
+Analyzing the Figure \ref{chap3:fig:satd_distribution} we find that self-admitted design debt is the most common in 4 out of 5 projects. Self-admitted design technical debt values ranged from 42\%, in Columba project with the lowest percentage, to 84\% in Jmeter and JFreeChart, projects with the highest percentage. The second most frequent type is self-admitted requirement debt with values between 5\% and 45\%, followed by self-admitted defect technical debt making up between 4\% to 9\% of the comments. Self-admitted test technical debt ranged from 0\% to 7\% whereas self-admitted documentation debt had only 0\% to 5\% of the comments.     
 
 We notice that Columba and ArgoUml have the highest occurrences of self-admitted requirement debt. Columba is a email client application written in Java, which has 9 contributors \cite{Openhub:home}, and a considerable number of classes 1,711. It is reasonable to think that developers have limited time to develop features. Therefore, leaving comments of features that need to be implemented in the future (i.e., requirement debt) is more likely. 
 
