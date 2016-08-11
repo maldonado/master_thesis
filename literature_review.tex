@@ -1,19 +1,20 @@
 % -*- root: cuthesis_masters.tex -*-
 
-In this chapter we will present related work on technical debt. These studies sets the current background of Technical Debt. More specifically, the technical debt studies presented in this chapter can be grouped in three main themes. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. 
+In this chapter we will present related work on technical debt. These studies sets the current background of technical debt. More specifically, the studies presented in this chapter are three fold. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. This first part lays the foundation of what it is technical debt and how it is being used nowadays. Second, we present studies that investigate the identification and the implications of technical debt in the source code. Third we present the studies that are more related with our own work which is the identification of \emph{self-admitted} technical debt. Self-admitted technical debt stands for the technical debt found in the source code comments.
 
-\section{Defining and Expanding Technical Debt Metaphor}
+\section{Defining and Expanding the Technical Debt Metaphor}
 \label{defining_and_extending_technical_debt}
 
-In the early days of technical debt most information were available on blogs written by acknowledgeable industry related writers. After the advent of Agile Methodologies, the term gained more power and became more popular. Nowadays, academia and industry alike study the applications of the technical debt metaphor.
+At first, most information about technical debt were available on blogs. These blogs were written by industry specialists and evangelists of Agile Methodologies, such as Martin Fowler. Nowadays, academia and industry alike study the applications of the technical debt metaphor. Thus, a large number of studies were dedicate to this matter, and therefore, the original metaphor has been expanded and refined.
 
-The metaphor \textit{technical debt} was introduced by Ward Cunningham~\cite{Cunningham1992WPM} more than two decades ago to facilitate the communication between developers and non-technical personal working on the same software project. Cunningham explains how ``not quite right code'' will affect the maintainability of a project (i.e., require more effort to maintain the project in the future) as interest does on debt. 
+The metaphor \textit{technical debt} was introduced by Ward Cunningham~\cite{Cunningham1992WPM} more than two decades ago to facilitate the communication between developers and non-technical personal working on the same software project. Cunningham explains how ``not quite right code'' will affect the maintainability of a project (i.e., require more effort to maintain the project in the future) as interest does on incurred debt. 
 
-In other words, every time that a implementation around the code affected by the not optimal implementation is needed an interest in form of more effort will be expend in the task, and how debt can speed up the project until there is so much accumulated debt that brings the project to a standstill. This term also provide managers the insight of why it can be beneficial to use resources to enhance a particular portion of the code even if it is not broken.
+In other words, every time that a implementation around the code affected by the non-optimal implementation is needed, an interest in form of effort will be expend in the task. Although debts may speed up the project development at first, accumulated debt will bring the project to a standstill in the long-run. Thus, the technical debt metaphor, provide insight to managers of why it is beneficial to use resources to enhance a particular portion of the code even if it is not broken.
 
-The term has been refined and expanded since, notably by Steve McConnell~\cite{McConnell07:TechnicalDebt} in his taxonomy and by Martin Fowler~\cite{MartinFowler:TechnicalDebtQuadrant} with his four quadrants. 
+The term has been refined and expanded since, notably by Steve McConnell~\cite{McConnell07:TechnicalDebt} in his taxonomy and by Martin Fowler~\cite{MartinFowler:TechnicalDebtQuadrant} with his four quadrants. As these works were very important to the development of a deeper understanding of technical debt and its applicability on software engineering we dedicated subsections \ref{chap2:mcconnel_subsection} and \ref{chap2:fowler_subsection} for further explanation on the authors' definition of technical debt. 
 
 \subsection{Unintentionally incurred debt vs. Intentionally incurred debt}
+\label{chap2:mcconnel_subsection}
 
 According to Steve McConnell, technical debt can be divided into two main kinds: \textit{unintentionally incurred debt} and \textit{intentionally incurred debt}.
 
@@ -41,6 +42,7 @@ Therefore, McConnell presents the following \textbf{taxonomy for technical debt}
 \end{enumerate}
 
 \subsection{Technical Debt Quadrant}
+\label{chap2:fowler_subsection}
 
 On the other hand, Fowler definition of technical debt is slight different, and it is represented by four quadrants namely reckless, prudent, deliberate and inadvertent. According to Fowler debt can be any combination of these four quadrants. 
 
@@ -50,13 +52,28 @@ For example, prudent deliberate debt is the one that the team knows they are tak
 \begin{figure*}[thb!]
   \centering
   \vspace{5mm}
-  \includegraphics[width=1\textwidth]{figures/literature_review/technical_debt_quadrant.png}
+  \includegraphics[width=.65\textwidth]{figures/literature_review/technical_debt_quadrant.png}
   \caption{Technical Debt Quadrant}
   \label{fig:technical_debt_quadrant}
 \end{figure*}
 
 
 Figure \ref{fig:technical_debt_quadrant} presents the actual technical debt quadrant, and illustrates on each cell the possible cases that can happen with a development team while working on a software project. 
+
+In addition, from the original description ``\textit{not quite right code which we postpone making it right}'' various people have used the metaphor of technical debt to describe many other \emph{kinds} of debts or faults of software development, including anything that is related to deploying, selling, or evolving a software system or anything that is intrinsic to software development such as test debt, people debt, architectural debt, requirement debt, documentation debt, or just an broad generalized software debt \cite{sterling2010book}. 
+
+In this matter, Kruchten \textit{et al.}~\cite{kruchten2012IEEE} express their concern about how the use (or abuse) of the metaphor could spread it too thin making the metaphor lose its communication power. For example, a not yet implemented requirement, function, or feature does not translate to  requirement debt. Similarly, postponing the development of a new function is not a planning debt. Another danger pointed out by the authors relates to the assistance of static code analyzers tools on the identification of technical debt. Although these tools are very useful there is a danger of equating whatever the tools can detect with what is technical debt. This approach leads to leaving aside large amounts of potential technical debt that is undetectable by tools, such as structural or architectural debt, technological gaps or self-admitted technical debt as discussed later on this chapter. 
+
+Spinola \textit{et al.} \cite{Spinola2013MTD}
+
+
+ Alves \textit{et al.}~\cite{Alves2014MTD} proposes an ontology of terms on technical debt in order to organize a common vocabulary for the area. In their work they extracted and organized concepts derived from the results of a systematic literature mapping. 
+
+finalizar com o jornal essa sessao. 
+
+As technical debt is a recent research area, its different types and their indicators are not organized yet. Therefore, this paper proposes an ontology of terms on technical debt in order to organize a common vocabulary for the area. The organized concepts derived from the results of a systematic literature mapping. The proposed ontology was evaluated in two steps. In the first one, some ontology design quality criteria were used. For the second one, a specialist in the area performed an initial evaluation. This work contributes to evolve the Technical Debt Landscape through the organization of the different types of technical debt and their indicators. We consider this an important contribution for both researchers and practitioners because this information was spread out in the literature hindering their use in research and development activities.
+
+conducted an extensive study to map research done in the area of technical debt and its different kinds. 
 
  
 
