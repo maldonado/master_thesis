@@ -1,6 +1,6 @@
 % -*- root: cuthesis_masters.tex -*-
 
-In this chapter we will present related work on technical debt. These studies sets the current background of technical debt. More specifically, the studies presented in this chapter are three fold. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. This first part lays the foundation of what it is technical debt and how it is being used nowadays. Second, we present studies that investigate the identification and the implications of technical debt in the source code. Third we present the studies that are more related with our own work which is the identification of \emph{self-admitted} technical debt. 
+In this chapter we will present related work on technical debt. These studies sets the current background of technical debt. More specifically, the studies presented in this chapter are two fold. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. This first part lays the foundation of what it is technical debt and how it is being used nowadays. Second, we present studies that investigate the identification and the implications of technical debt in the source code, including studies that are more related with our own work which is the identification of \emph{self-admitted} technical debt. 
 
 Although we provide a broad review of related work in technical debt in this chapter, more specific related work can be found in the chapters \ref{chapter3} and \ref{chapter4}.
 
@@ -50,7 +50,6 @@ On the other hand, Fowler definition of technical debt is slight different, and 
 
 For example, prudent deliberate debt is the one that the team knows they are taking on a debt, and thus puts some thought as to whether the payoff for an earlier release is greater than the costs of paying it off. However, a team not aware of design practices is taking on its reckless debt without even realizing how much hack it's getting into (inadvertent). Although reckless debt may not be inadvertent. A team may know about good design practices, but decide to go ``quick and dirty'' because they think they can not afford the time required to write clean code. The fourth cell of the quadrant is prudent/inadvertent debt. This case represent the case where a skilled development team is creating a project applying the best design to handle the current requirements, however over time, the chosen design proves to be inadequate to the future need of the project. Fowler points out that the point is that while you are programming, you are also learning. It is often the case that it can take a year of programming on a project before you understand what the best design approach should have been.  
 
- 
 \begin{figure*}[thb!]
   \centering
   \vspace{5mm}
@@ -58,8 +57,7 @@ For example, prudent deliberate debt is the one that the team knows they are tak
   \caption{Technical Debt Quadrant}
   \label{fig:technical_debt_quadrant}
 \end{figure*}
-
-
+  
 Figure \ref{fig:technical_debt_quadrant} presents the actual technical debt quadrant, and illustrates on each cell the possible cases that can happen with a development team while working on a software project. 
 
 In addition, from the original description ``\textit{not quite right code which we postpone making it right}'' various people have used the metaphor of technical debt to describe many other \emph{kinds} of debts or faults of software development, including anything that is related to deploying, selling, or evolving a software system or anything that is intrinsic to software development such as test debt, people debt, architectural debt, requirement debt, documentation debt, or just an broad generalized software debt \cite{sterling2010book}. 
@@ -75,13 +73,30 @@ Alves \textit{et al.}~\cite{Alves2014MTD,Alves2016IST} proposes an ontology of t
 
 These works summarize the definition and expansion of the technical debt metaphor. 
 
-\subsection{Identification and Implications of Technical Debt in the Source Code}
+\section{Identification and Implications of Technical Debt}
 
-A number of studies have focused on the detection and management of technical debt. Much of this work has been driven by the Managing Technical Debt Workshop community. 
+\subsection{Using Source Code and Static Analysis Tools}
 
+A number of studies have focused on the detection and management of technical debt. Much of this work has been driven by the Managing Technical Debt Workshop community. Static analysis tools can help to detect source code anomalies and object oriented violations using metrics and thresholds to evaluate code quality. These violations are commonly referred as bad smells and they follow under the design technical debt type of debt. 
 
+Zazworka \textit{et al.}~\cite{Zazworka2013CSE} conducted an experiment where a development team was asked to identify technical debt items in artifacts from a software project that they were familiar with. Then, the authors collected the output of three static analysis tools to
+automatically identify technical debt and compared it to the results of human elicitation.
 
-
+%  This study focuses
+% on the identification of TD. We evaluate human elicitation of TD
+% and compare it to automated identification. Method: We asked a
+% development team to identify TD items in artifacts from a
+% software project on which they were working. We provided the
+% participants with a TD template and a short questionnaire. In
+% addition, we also collected the output of three tools to
+% automatically identify TD and compared it to the results of human
+% elicitation. Results: There is little overlap between the TD
+% reported by different developers, so aggregation, rather than
+% consensus, is an appropriate way to combine TD reported by
+% multiple developers. The tools used are especially useful for
+% identifying defect debt but cannot help in identifying many other
+% types of debt, so involving humans in the identification process is
+% necessary. 
 
 
 % A number of studies has focused on the detection and management of technical debt. For example, Seaman et al. [SG11], Kruchten et al. [KNOF13] and Brown et al. [BCG+10] make several reflections about the term technical debt and how it has been used to communicate the issues that developers find in the code in a way that managers can understand.
@@ -90,3 +105,19 @@ A number of studies have focused on the detection and management of technical de
 
 % In a follow up work, Zazworka et al. [ZSSS11] conducted a study to measure the im- pact of technical debt on software quality. They focused on a particular kind of design debt, namely, God Classes. They found that God Classes are more likely to change, and therefore, have a higher impact on software quality. Fontana et al. [FFS12] inves- tigated design technical debt appearing in the form of code smells. They used metrics to find three different code smells, namely God Classes, Data Classes and Duplicated Code. They proposed an approach to classify which one of the different code smells should be addressed first, based on its risk. Ernst et al. [EBO+15] conducted a survey with 1,831 participants and found that architectural decisions are the most important source of technical debt.
 
+
+\subsection{Using Source Code Comments (Self-Admitted Technical Debt)}
+
+A lot of effort has been made to identify and manage technical debt. Despite the help provided by static source code analysis tools the identification of technical debt is still an open challenge. More recently, Potdar and Shihab~\cite{Potdar2014ICSME} found that source code comments can be analyzed to identify technical debt. Differently from most source code analysis tools, that rely on suggested metrics and thresholds to detect a \emph{supposed} debt, technical debt found in the source comment is written by the developer of the program as a \emph{confession}. These developers are explicitly saying that a particular implementation is not ideal, in other words this implementation is \emph{self-admitted technical debt}. 
+
+Potdar and Shihab~\cite{Potdar2014ICSME} conducted the first study to explore source code comments to identify technical debt. They extracted the source comments from 5 open source projects, and manually inspected them. In total, the authors read and analyzed more than 100K comments, and they come up with 62 different comment patterns that indicates the presence of \SATD. These comment patterns are words or small phrases such as ``retarded'', ``stupid'' and ``remove this ugly code''. Besides of the 62 comment patterns they found that \SATD comments are present in 2.4\% to 31\% of the analyzed files, that developers with higher experience tend to introduce most of the \SATD and that time pressures and complexity of the code do not correlate with the amount of self-admitted technical debt. This work is the current state-of-the-art in the identification of \SATD. 
+
+Bavota and Russo~\cite{bavota2016MSR} presented differentiated replication of the work by Potdar and Shihab. The authors analyzed 159 software projects to investigate the diffusion and evolution of \SATD and its relationship with software quality. During this study the authors extracted over 600K commits and 2 Billion comments. Their main findings shown that \SATD is diffused, with an average of 51 instances per system, increases over time due to the introduction of new instances that are not fixed by developers, and even when fixed, it survives long time (over 1,000 commits on average) in the system.
+
+Also, Farias \textit{et al.}~\cite{Farias2015MTD} developed a Contextualized Vocabulary Model for identifying technical debt on code comments (CVM-TD). CVM-TD uses word classes and code tags to support technical debt identification based on the comment patterns devised in \cite{Potdar2014ICSME}. The model created by the authors provided a structure that systematically allows combining terms creating a large vocabulary on technical debt. However, they authors points out that  CVM-TD needs to be calibrated in order to improve its accuracy. 
+
+Wehaibi \textit{et al.}~\cite{wehaibi2016SANER} also took advantage of the comment patterns to examine the relation between \SATD and software quality. The authors analyzed if files with \SATD have more defects compared to files without \SATD, if \SATD changes are more likely to introduce future defects, and if \SATD changes tend to be more difficult. They ran analyzes on 5 open source projects to find that there is no clear trend between defects and \SATD, however, \SATD changes are more difficult to perform (i.e., they are more complex).
+
+The work mentioned so far relied on the identification of technical debt through source code comments, specifically using the comment patterns approach. One thing that is not explored however is how good is the comment patterns approach to identify technical debt. Another topic that is not explored is that the comment patterns approach does not provide support for the identification of different types of technical debt. The first step to address the afore mentioned limitations is to create a golden dataset of \SATD comments where different approaches can be compared in terms of precision and recall. Also, such dataset if available, could provide insights on the different types of \SATD. 
+
+Noticing these research opportunities we create a golden dataset of \SATD and we present it in the following chapter of this dissertation.
