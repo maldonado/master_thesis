@@ -1,6 +1,8 @@
 % -*- root: cuthesis_masters.tex -*-
 
-In this chapter we will present related work on technical debt. These studies sets the current background of technical debt. More specifically, the studies presented in this chapter are three fold. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. This first part lays the foundation of what it is technical debt and how it is being used nowadays. Second, we present studies that investigate the identification and the implications of technical debt in the source code. Third we present the studies that are more related with our own work which is the identification of \emph{self-admitted} technical debt. Self-admitted technical debt stands for the technical debt found in the source code comments.
+In this chapter we will present related work on technical debt. These studies sets the current background of technical debt. More specifically, the studies presented in this chapter are three fold. First, we present studies that discuss the definition and the extensibility of the technical debt metaphor. This first part lays the foundation of what it is technical debt and how it is being used nowadays. Second, we present studies that investigate the identification and the implications of technical debt in the source code. Third we present the studies that are more related with our own work which is the identification of \emph{self-admitted} technical debt. 
+
+Although we provide a broad review of related work in technical debt in this chapter, more specific related work can be found in the chapters \ref{chapter3} and \ref{chapter4}.
 
 \section{Defining and Expanding the Technical Debt Metaphor}
 \label{defining_and_extending_technical_debt}
@@ -64,19 +66,27 @@ In addition, from the original description ``\textit{not quite right code which 
 
 In this matter, Kruchten \textit{et al.}~\cite{kruchten2012IEEE} express their concern about how the use (or abuse) of the metaphor could spread it too thin making the metaphor lose its communication power. For example, a not yet implemented requirement, function, or feature does not translate to  requirement debt. Similarly, postponing the development of a new function is not a planning debt. Another danger pointed out by the authors relates to the assistance of static code analyzers tools on the identification of technical debt. Although these tools are very useful there is a danger of equating whatever the tools can detect with what is technical debt. This approach leads to leaving aside large amounts of potential technical debt that is undetectable by tools, such as structural or architectural debt, technological gaps or self-admitted technical debt as discussed later on this chapter. 
 
-Spinola \textit{et al.} \cite{Spinola2013MTD}
+Later, Spinola \textit{et al.} \cite{Spinola2013MTD} identified and organized a number of statements about technical debt expressed by practitioners in online websites, blogs and published papers. The authors chose 14 statements related to technical debt and conducted two surveys with 37 participants to evaluate the level of agreement on each statement. 
+They found that practitioners strongly agree that if technical debt is not managed effectively, maintenance costs will increase at a rate that will eventually outrun the value it delivers to customers. In addition, they found that practitioners strongly disagree that all technical debt is intentional, the results found by the authors support the expanded technical debt definition proposed by McConnel and Fowler. 
+
+Moreover, the authors state that the acceptance and use of the TD metaphor is in large part because it is easily understood. However, this can also be a concern to accurately define technical debt. Their reasoning is that because the TD metaphor is easy to understand, it is also easy to talk about, expand on, and relate experience to. A quick search of TD literature reveals subjective opinions, personal views, and catch phrases on such channels as blogs and online essays. Therefore, more analysis on the use of the metaphor is necessary to organize the technical debt landscape.
+
+Alves \textit{et al.}~\cite{Alves2014MTD,Alves2016IST} proposes an ontology of terms on technical debt in order to organize a common vocabulary for the area. In their work they extracted and organized concepts derived from the results of a systematic literature mapping. In total, 100 studies, dated from 2010 to 2014, were evaluated. Their work contributed towards the evolution of the technical debt landscape through the organization of the different types of technical debt and their indicators. The authors found in the literature the following types of debt: design debt, architecture debt, documentation debt, test debt, code debt, defect debt, requirements debt, infrastructure debt, people debt, test automation debt, process debt, build debt, service debt, usability debt and versioning debt. Moreover, they state that some instances of technical debt can fit more than one type of technical debt. 
+
+These works summarize the definition and expansion of the technical debt metaphor. 
+
+\subsection{Identification and Implications of Technical Debt in the Source Code}
+
+A number of studies have focused on the detection and management of technical debt. Much of this work has been driven by the Managing Technical Debt Workshop community. 
 
 
- Alves \textit{et al.}~\cite{Alves2014MTD} proposes an ontology of terms on technical debt in order to organize a common vocabulary for the area. In their work they extracted and organized concepts derived from the results of a systematic literature mapping. 
-
-finalizar com o jornal essa sessao. 
-
-As technical debt is a recent research area, its different types and their indicators are not organized yet. Therefore, this paper proposes an ontology of terms on technical debt in order to organize a common vocabulary for the area. The organized concepts derived from the results of a systematic literature mapping. The proposed ontology was evaluated in two steps. In the first one, some ontology design quality criteria were used. For the second one, a specialist in the area performed an initial evaluation. This work contributes to evolve the Technical Debt Landscape through the organization of the different types of technical debt and their indicators. We consider this an important contribution for both researchers and practitioners because this information was spread out in the literature hindering their use in research and development activities.
-
-conducted an extensive study to map research done in the area of technical debt and its different kinds. 
-
- 
 
 
 
+
+% A number of studies has focused on the detection and management of technical debt. For example, Seaman et al. [SG11], Kruchten et al. [KNOF13] and Brown et al. [BCG+10] make several reflections about the term technical debt and how it has been used to communicate the issues that developers find in the code in a way that managers can understand.
+% 62
+% Other work focused on the detection of technical debt. Zazworka et al. [ZSV+13] conducted an experiment to compare the efficiency of automated tools in comparison with human elicitation regarding the detection of technical debt. They found that there is a small overlap between the two approaches, and thus it is better to combine them than replace one with the other. In addition, they concluded that automated tools are more efficient in finding defect debt, whereas developers can realize more abstract categories of technical debt.
+
+% In a follow up work, Zazworka et al. [ZSSS11] conducted a study to measure the im- pact of technical debt on software quality. They focused on a particular kind of design debt, namely, God Classes. They found that God Classes are more likely to change, and therefore, have a higher impact on software quality. Fontana et al. [FFS12] inves- tigated design technical debt appearing in the form of code smells. They used metrics to find three different code smells, namely God Classes, Data Classes and Duplicated Code. They proposed an approach to classify which one of the different code smells should be addressed first, based on its risk. Ernst et al. [EBO+15] conducted a survey with 1,831 participants and found that architectural decisions are the most important source of technical debt.
 
