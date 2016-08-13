@@ -79,32 +79,11 @@ These works summarize the definition and expansion of the technical debt metapho
 
 A number of studies have focused on the detection and management of technical debt. Much of this work has been driven by the Managing Technical Debt Workshop community. Static analysis tools can help to detect source code anomalies and object oriented violations using metrics and thresholds to evaluate code quality. These violations are commonly referred as bad smells and they follow under the design technical debt type of debt. 
 
-Zazworka \textit{et al.}~\cite{Zazworka2013CSE} conducted an experiment where a development team was asked to identify technical debt items in artifacts from a software project that they were familiar with. Then, the authors collected the output of three static analysis tools to
-automatically identify technical debt and compared it to the results of human elicitation.
+Zazworka \textit{et al.}~\cite{Zazworka2011MTD} conducted a case study to investigate how design debt, in the form of god classes, affects the maintainability of software projects. The authors analyzed two commercial applications of a small-size software development company. They found that god classes suffer more changes and contain more defects than non-god classes showing that technical debt has a negative impact on software quality, and should therefore be identified and managed closely in the development process.
 
-%  This study focuses
-% on the identification of TD. We evaluate human elicitation of TD
-% and compare it to automated identification. Method: We asked a
-% development team to identify TD items in artifacts from a
-% software project on which they were working. We provided the
-% participants with a TD template and a short questionnaire. In
-% addition, we also collected the output of three tools to
-% automatically identify TD and compared it to the results of human
-% elicitation. Results: There is little overlap between the TD
-% reported by different developers, so aggregation, rather than
-% consensus, is an appropriate way to combine TD reported by
-% multiple developers. The tools used are especially useful for
-% identifying defect debt but cannot help in identifying many other
-% types of debt, so involving humans in the identification process is
-% necessary. 
+Fontana \textit{et al.}~\cite{Fontana2012MTD} also analyzed design debt in the form of bas smells. The authors focus their attention on three specific code smells (i.e., god Class, data Class and duplicate code) extracted from open source systems of different domains. They proposed an approach to suggest which bad smell should be addressed first based on the negative impact they have on the quality of the project.
 
-
-% A number of studies has focused on the detection and management of technical debt. For example, Seaman et al. [SG11], Kruchten et al. [KNOF13] and Brown et al. [BCG+10] make several reflections about the term technical debt and how it has been used to communicate the issues that developers find in the code in a way that managers can understand.
-% 62
-% Other work focused on the detection of technical debt. Zazworka et al. [ZSV+13] conducted an experiment to compare the efficiency of automated tools in comparison with human elicitation regarding the detection of technical debt. They found that there is a small overlap between the two approaches, and thus it is better to combine them than replace one with the other. In addition, they concluded that automated tools are more efficient in finding defect debt, whereas developers can realize more abstract categories of technical debt.
-
-% In a follow up work, Zazworka et al. [ZSSS11] conducted a study to measure the im- pact of technical debt on software quality. They focused on a particular kind of design debt, namely, God Classes. They found that God Classes are more likely to change, and therefore, have a higher impact on software quality. Fontana et al. [FFS12] inves- tigated design technical debt appearing in the form of code smells. They used metrics to find three different code smells, namely God Classes, Data Classes and Duplicated Code. They proposed an approach to classify which one of the different code smells should be addressed first, based on its risk. Ernst et al. [EBO+15] conducted a survey with 1,831 participants and found that architectural decisions are the most important source of technical debt.
-
+In a follow up work, Zazworka \textit{et al.}~\cite{Zazworka2013CSE} conducted an experiment where a development team was asked to identify technical debt items in artifacts from a software project that they were familiar with. Then, the authors collected the output of three static analysis tools to automatically identify technical debt and compared it to the results of human elicitation. The authors found that there is little overlap between the technical debt reported by different developers, so aggregation, rather than consensus, is an appropriate way to combine technical debt reported by multiple developers. Moreover, they confirmed that static analysis tools can not detect many different types of technical debt, and therefore, involving humans in the identification process is necessary. 
 
 \subsection{Using Source Code Comments (Self-Admitted Technical Debt)}
 
