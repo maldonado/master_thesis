@@ -1,1 +1,47 @@
 % -*- root: cuthesis_masters.tex -*-
+
+\section{Summary of Addressed Topics}
+
+The main focus of our thesis is to tackle the challenges of \SATD identification. First, we conducted a survey of the state-of-the-art in the identification of technical debt research in order to understand the main challenges. Then, we manually analyzed a number of comments from different projects belonging to different application domains. Next, we propose an approach based on NLP techniques that outperforms the current state of the art in the identification of \SATD. The remainder of this section details the major topics covered in this thesis.
+
+Chapter 2 surveys the state-of-art in technical debt. We performed concise chronological review from 1992 (the coining of the technical debt metaphor) to the most actual research and definitions available. We believe that such a review is necessary at this time, since a lot of research is aiming to better understand technical debt. Therefore, it is an ideal time to reflect on the definitions and applications of the metaphor as well to evaluate the current challenges in the field.
+
+Chapter 3 presents the result of the quantification of the different types of \SATD. In this chapter we analyzed the comments of 5 open source projects. These projects are considered well commented and they belong to different application domains. We used them to understand the characteristics of self-admitted technical debt types creating a rich dataset with more than 33,093 classified comments. We find that self-admitted technical debt can be classified into five types: design debt, defect debt, documentation debt, requirement debt and test debt. However, the two most prevalent types of \SATD are design and requirement \SATD. Design debt ranged from 42\% to 84\% across the projects, whereas, requirement debt ranged from 5\% to 45\%. 
+
+Chapter 4 presents an approach that uses classified design and requirement \SATD comments to train a maximum entropy classifier to automatically identify \SATD. We evaluated the performance of our approach against two other baselines, i.e., the comment patterns baseline and the simple (random) baseline. We shown that our approach performance surpassed the comment patterns baseline on average 2.3 and 6 times in the identification of design and requirement \SATD, respectively. Analyzing the features to identify \SATD we find that the words used to express design and requirement \SATD are different from each other. In addition, we find that using only 5\% and 23\% of the comments in the training dataset still leads to an accuracy that is equivalent to 80\% and 90\% of the best performance, respectively.
+
+\section{Contributions}
+
+The goal of this thesis is to propose an approach that can effectively identify \SATD comments. We make several contributions towards this goal. These contributions were motivated by previous research and our industrial experience. We now highlight the main contributions of the thesis in more detail.
+
+
+The major contributions of this thesis are as follows:
+\begin{itemize}
+
+\item \textbf{A concise review of the state of the art in technical debt:} We provide the readers a concise background evaluation from the the creation of the metaphor until present date. We choose the most relevant sources that define how the technical debt is being used and also the challenges involving the identification of technical debt.
+
+\item \textbf{A rich dataset of manually labeled technical debt:} To create such dataset we read and analyzed the source code comments of 10 open source projects considered well commented and from different application domains. The comments of these projects were manually classified into specific types of technical debt such as design, requirement, defect, documentation and test debt. In total, our dataset contain 62,566 labeled comments and we made it publicly available to enable future research on the field. 
+
+In addition, to mitigate the risk of creating a biased dataset, we also asked a student that was not involved with our work to classify a stratified sample. Then, we calculate the Kappa's level of agreement between the two classifications. The level of agreement obtained was +0.81, which according to Fleiss~\cite{Fleiss1981measurement} is characterized as an excellent inter-rater agreement.
+
+\item \textbf{An automatic, NLP-based, approach to identify design and requirement \SATD:} We have shown that our approach outperforms the current state-of-the-art on average 2.3 and 6 times in the identification of design and requirement \SATD, respectively. Moreover, our approach can identify requirement \SATD, while the comment patterns baseline fails to detect this kind of debt in the majority of the examined projects. Furthermore, the performance of our approach outperforms the simple (random) baseline on average 7.6 and 19.1 times for design and requirement \SATD, respectively. 
+
+\item \textbf{An empirical experiment to investigate the amount of training data necessary to effectively identify technical debt:} We discuss the implications of the amount training data that is necessary to apply our approach. For example, if we need a very large number of comments to create our training dataset, our approach will be more difficult to extend and apply for other projects. On the other hand, if a small dataset can be used to reliably identify comments with \SATD, then this approach can be applied with minimal effort, i.e., less training data. However, we find that using only 5\% and 23\% of the comments in the training dataset leads to an accuracy that is equivalent to 80\% and 90\% of the best performance, respectively. Our results also show that developers use a richer vocabulary to express design \SATD and a training dataset of at least 3,900 comments (of which 195 comments are design \SATD) is necessary to obtain a satisfactory classification. On the other hand, requirement \SATD is expressed in a more uniform way, and with a training dataset of 2,600 comments (of which 52 are \SATD) it is possible to classify with relatively high accuracy requirement \SATD.
+
+\end{itemize}
+
+\section{Future Work}
+
+We believe that our thesis makes a positive contribution towards the goal of effectively identifying technical debt. However, there are still many open challenges that need to be tackled in order to improve the identification of technical debt. We now highlight some avenues for future work.
+
+\subsection{Fine tunning the approach to obtain optimal results}
+
+Although we conducted a number of diverse experiments with the NLP classifier, we believe that is still a lot of opportunities to be explored that may improve even further our approach. For example, we noticed that using subsets of our training dataset can be more suitable for some applications than using the whole dataset due to domain particularities. Also, taking similar application domains into consideration when creating the dataset should be better analyzed.
+
+\subsection{Expanding the scope of our approach}
+
+We plan to examine the applicability of our approach to more domains than those we study in this paper and software projects developed in different programming languages. Also, would be interesting to analyze projects that uses comments in different idioms than English. As we shown, we provide filtering heuristics that could be easily adapted to remove irrelevant comments from software projects and that we need a reduced amount of comments to obtain satisfactory results concerning the identification of technical debt. We believe that these factors will help future work to expand considerably. 
+
+\subsection{Tool support for software developers}
+
+Lastly, we plan to use the findings of this study to build a tool that will support software engineers in the task of identifying and managing \SATD. We envision that such tool would be useful to monitor debt and focus resources during the development of the software project, moreover, when properly managed software developers could take advantage of incurring debt when necessary, without loosing track of the overall qaulity of the system.
