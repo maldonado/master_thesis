@@ -14,12 +14,43 @@ However, there are limitations to these approaches. First, static analysis tools
 
 More recently, another venue was explored to enable identification of technical debt, the use of source code comments. Potdar and Shihab~\cite{Potdar2014ICSME} devised an approach of 62 comment patterns (i.e., words and phrases) that was used by software developers to indicate ``not quite right code''. The detection of technical debt through source code comments does not suffer of the same limitations that static analysis tools as it is a more lightweight process that does not depend of source code representations, and does not depend on thresholds of any kind as the developers themselves are admitting the debt. Due to its nature, technical debt found in source code comments is referred as \emph{\SATD}.
 
-% However, their approach does not take into consideration the different types of technical debt. Understanding the different types of self-admitted technical debt is important since: 1) it helps the community understand the limitations of understanding technical debt through code comments, 2) it allows us to complement existing technical debt detection approaches and 3) it provides us with a better understanding of the developer’s point of view of technical debt.
-% Therefore, in this chapter we examine and quantify the different types of self- admitted technical debt. To do so, we extract source code comments from 5 well com- mented open source projects that belongs to different application domains, namely Apache Ant, Apache Jmeter, ArgoUml, Columba and JFreeChart. In total, we ex- amined more than 166K comments. We applied a set of 4 simple filtering heuristics to remove comments that are not likely to contain self-admitted technical debt (e.g., license comments, commented source code, Javadoc comments). Finally, these filter- ing heuristics resulted in a dataset of 33,093 comments that the first author manually analyzed and classified into different types of self-admitted technical debt.
-
+Thus far, the identification of \SATD provide researches a lot of open questions and research opportunities. For example, the comment patterns approach does not take into consideration the many different types of technical debt, it heavily relies on the manual classification of source code comments and it has no means to be evaluated in terms of precision and recall. Therefore this thesis take these research opportunities to pavement a solid way in the identification of technical debt through source code comments. 
 
 \section{Research Hypothesis}
 
 Prior research and our industrial experience lead us to the formation of our research hypothesis. We believe that:
 
+\conclusionbox{The identification of technical debt through source code comments remains limited. We hypothesize that source code comments are mostly overlooked by researches because 1) it is written in natural language, and therefore, very complex to automatically analyze it; 2) Only a small percentage of source code comments present opinions that can lead to the identification of technical debt; 3) It is very difficult to evaluate an approach performance without knowing all the possible instances of technical debt contained in a project. We believe that source code comment approaches to identify technical debt are important as they processes the opinions of the developers. Moreover, we believe that \SATD approaches can be combined with source code analysis tools to help eliminate false positives.}
 
+The goal of this thesis is to propose an approach that can effectively identify \SATD comments. The thesis is divided into two main chapters. The first part focus on the definition and general understanding of technical debt where we manually analyze source code comments to better understand the nature of \SATD. The second part proposes an approach to identify technical debt using Natural Language Processing (NLP)techniques.
+
+\section{Thesis Overview}
+
+We now give an overview of the work presented in this thesis.
+
+\subsection{Chapter 2: Literature Review}
+
+Chapter \ref{literature_review} details the definition of the technical debt metaphor and its expansion over time as more developers starts adopting the term to communicate suboptimal solutions. The review include summarized and concise information extracted from websites, blogs and research papers from the creation of the metaphor until present date. The chapter concludes with a critical evaluation of current limitations in the area and the challenges surrounds the technical debt landscape.
+
+\subsection{Chapter 3: Analyzing Source Code Comments and Different Types of Self-Admitted Technical Debt}
+    
+In this chapter we examine source code comments from 5 open source projects to determine the different types of technical debt. First, we propose four simple filtering heuristics to eliminate comments that are not likely to contain technical debt. Filtering out irrelevant comments is very helpful as we can focus our attention to the more insightful comments. Second, we manually classify the remainder comments (i.e., more than 33K comments), and we find that \SATD can be classified into five main types - design debt, defect debt, documentation debt, requirement debt and test debt. The  most common type of self-admitted technical debt is design debt, making up between 42\% to 84\% of the classified comments.
+
+\subsection{Chapter 4: Proposing an Approach to Automatically Identify Self-Admitted Technical Debt}
+
+In this chapter, we present an approach to automatically identify design and requirement \SATD using Natural Language Processing (NLP). We study 10 open source projects. Using our approach we are able to accurately identify \SATD, we also discuss about the features (i.e., words) that are the best indicators of design and requirement debt. Lastly, as training data is the most crucial point to apply and expand our approach, we conduct a detailed analysis on the necessary quantity of training data to obtain satisfactory classification performances.
+
+\section{Thesis Contributions}
+
+The major contributions of this thesis are as follows:
+\begin{itemize}
+
+\item A concise review of the state of the art in technical debt. Such a review is very important to situate interested researchers as the use of the metaphor is becoming more popular each passing day.
+
+\item We contribute a rich dataset of self-admitted technical making the data used in this study publicly available. To the best of our knowledge, there is not similar data available and we believe that the dataset will help future research in the area of \SATD providing the necessary means to evaluate and apply different approaches.
+
+\item We propose an automatic, NLP-based, approach that outperforms the current state-of-the-art in the identify design and requirement \SATD. 
+
+\item We investigate the amount of training data necessary to effectively identify technical debt through an empirical experiment, giving support to future enhancement and expansion of our approach, such as train datasets to detect \SATD comments in different programming languages or idioms.
+
+\end{itemize}
