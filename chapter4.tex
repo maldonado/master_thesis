@@ -32,7 +32,7 @@ We find that the top design debt words are related to sloppy or mediocre source 
 Finally, to determine the most efficient way to apply our approach, we analyze the amount of training data necessary to effectively identify \SATD. We find that training datasets using 23\% of the available data can achieve a performance equivalent to 90\% of the maximum F1-measure score for both design and requirement \SATD. Similarly, 80\% of the maximum F1-measure can be achieved using only 9\% of the available data for design \SATD, and 5\% for requirement \SATD.
 
 The main contributions of our work are the following:
-\vspace{-1.5mm}
+% \vspace{-1.5mm}
 \begin{itemize}
   \item We provide an automatic, NLP-based, approach to identify design and requirement \SATD.
   \item We examine and report the words that best indicate design and requirement \SATD.
@@ -70,11 +70,17 @@ Since there are many different definitions for the SLOC metric we clarify that, 
 The number of contributors was extracted from OpenHub, an on-line community and public directory that offers analytics, search services and tools for open source software \cite{Openhub:home}. It is important to note that the number of comments shown for each project does not represent the number of commented lines, but rather the number of Single-line, Block and Javadoc comments. In total, we obtained 259,229 comments, found in 16,249 Java classes. The size of the selected projects varies between 81,307 and 228,191 SLOC, and the number of contributors of these projects ranges from 9 to 328. 
 
 \begin{landscape}
-\begin{table*}[thb!]
-    \begin{center}
+
+\begin{table}[thb!]
+    
     \caption{Details of the Studied Projects}
     \label{chap4:tab:project_details}
+    
+    \centering
+    \resizebox{\columnwidth}{!}{%
+    
             \begin{tabular}{l| c c r c || c c c || c c c}
+            
             \toprule
             
             \multirow{5}{*}{\textbf{\thead{Project}}} & \multicolumn{4}{c||}{\textbf{\thead{Project Details}}} & \multicolumn{3}{c||}{\textbf{\thead{Comments Details}}} & \multicolumn{3}{c}{\textbf{\thead{Technical Debt Details}}}
@@ -98,9 +104,8 @@ The number of contributors was extracted from OpenHub, an on-line community and 
             \textbf{Average}        &          &1,625  &146,206  &91   &25,923  & 6,257   & 407 (1.86)    &  71.84  & 14.24  & 13.89 \\ 
             \textbf{Total}          &          &16,249 &1,462,058&909  &259,229 & 62,566  & 4,071 (-)     &  -      & -      & -     \\   
             \bottomrule             
-        \end{tabular}
-    \end{center}
-\end{table*}
+        \end{tabular}}
+\end{table}
 \end{landscape}
 
 \subsection{Parse Source Code} 
@@ -228,9 +233,10 @@ In order to avoid having repeated features differing only in letter case (e.g., 
 The goal of our research is to develop an automatic way to detect design and requirement \SATD comments. To do so, we first manually classify a large number of comments identifying those containing \SATD. With the resulting dataset, we train the maximum entropy classifier to identify design and requirement \SATD (RQ1). To better understand what words indicate \SATD, we inspect the features used by the maximum entropy classifier to identify the detected \SATD. These features are words that are frequently found in comments with technical debt. We present the 10 most common words that indicate design and requirement \SATD (RQ2). Since the manual classification required to create our training dataset is expensive, ideally we would like to achieve maximum performance with the least amount of training data. Therefore, we investigate how variations in the size of training data affects the performance of our classification (RQ3). We detail the motivation, approach and present the results of each of our research questions in the remainder of this section. 
 \begin{landscape}
 \begin{table*}[!thb]
-    \begin{center}
+    \centering
         \caption{Comparison of F1-measure between the NLP-based, the Comment Patterns and the Random Baseline Approaches for Design and Requirement Debt}
         \label{chap4:tbl:improvement_f1measure}
+        \resizebox{\columnwidth}{!}{%
         \begin{tabular}{l| c c c c c| c c c c c}
         \toprule
         
@@ -258,18 +264,18 @@ The goal of our research is to develop an automatic way to detect design and req
         \textbf{Average}   &0.620&0.267&0.081&2.3$\times$&7.6   $\times$&0.403&0.067&0.021&6.0 $\times$  & 19.1$\times$ \\ 
         \bottomrule
         \end{tabular}
-    \end{center}    
+    }    
 \end{table*}
 \end{landscape}
 
 
 \begin{figure*}[!thb]
   \centering
-  \subfigure[Design Debt]{\includegraphics[width=0.48\textwidth]{figures/chapter4/f1_measure_comparisom_design_1.pdf}
+  \subfigure[Design Debt]{\includegraphics[width=.8\textwidth]{figures/chapter4/f1_measure_comparisom_design_1.pdf}
   \label{chap4:fig:f1_measure_comparison_design_debt}}
-  \subfigure[Requirement Debt]{\includegraphics[width=0.48\textwidth]{figures/chapter4/f1_measure_comparisom_requirement_1.pdf}
+  \subfigure[Requirement Debt]{\includegraphics[width=.8\textwidth]{figures/chapter4/f1_measure_comparisom_requirement_1.pdf}
   \label{chap4:fig:f1_measure_comparison_requirement_debt}}
-  \vspace{-3mm}
+  
   \caption{Visualization of the F1-measure for Different Approaches}
 \end{figure*}
 
@@ -320,31 +326,6 @@ For each analyzed project, we collect the features used to identify the \SATD co
 
 \noindent \textbf{Results:} Table \ref{chap4:tbl:top_ten_features} shows the top-10 textual features used to identify  \SATD in the ten studied projects, ordered by their average ranking. The first column shows the ranking of each textual feature, the second column lists the features used in the identification of \emph{design} \SATD, and the third column lists the textual features used to identify \emph{requirement} \SATD.
 
-\begin{table}[!thb]
-    \begin{center}
-        \caption{Top-10 Textual Features Used to Identify Design and Requirement Self-Admitted Technical Debt}
-        \label{chap4:tbl:top_ten_features}
-        % \vspace{-3mm}
-        \begin{tabular}{l| l l }
-        \toprule
-        \textbf{Rank} & \textbf{Design Debt} & \textbf{Requirement Debt}  \\
-        \midrule
-         \textbf{1}  & \textbf{hack}       &   \textbf{todo}     \\
-         \textbf{2}  & \textbf{workaround} &   \textbf{needed}   \\
-         \textbf{3}  & yuck!      &   \textbf{implementation}    \\
-         \textbf{4}  & kludge     &   \textbf{fixme}             \\
-         \textbf{5}  & stupidity  &   \textbf{xxx}               \\
-         \textbf{6}  & needed?    &   ends?             \\
-         \textbf{7}  & columns?   &   convention        \\
-         \textbf{8}  & unused?    &   configurable      \\
-         \textbf{9}  & wtf?       &   apparently        \\
-         \textbf{10} & todo       &   fudging           \\
-        \bottomrule
-        \end{tabular}
-    \end{center}    
-\end{table}
-
-
 From Table~\ref{chap4:tbl:top_ten_features} we observe that the top ranked textual features for design \SATD, i.e., \textit{hack}, \textit{workaround}, \textit{yuck!}, \textit{kludge} and \textit{stupidity}, indicate sloppy code, or mediocre source code quality. For example, we have the following comment that was found in JMeter:
 
 \vspace{1mm}
@@ -388,6 +369,30 @@ Some of the remaining lower ranked textual features, such as \textit{convention}
 \textit{``TODO: find a way to check the manifest-file, that is found by naming \textbf{convention}''} [from Apache Ant]
 \end{displayquote}
 \vspace{1mm}
+
+\begin{table}[!thb]
+    \begin{center}
+        \caption{Top-10 Textual Features Used to Identify Design and Requirement Self-Admitted Technical Debt}
+        \label{chap4:tbl:top_ten_features}
+        \vspace{1mm}
+        \begin{tabular}{l| l l }
+        \toprule
+        \textbf{Rank} & \textbf{Design Debt} & \textbf{Requirement Debt}  \\
+        \midrule
+         \textbf{1}  & \textbf{hack}       &   \textbf{todo}     \\
+         \textbf{2}  & \textbf{workaround} &   \textbf{needed}   \\
+         \textbf{3}  & yuck!      &   \textbf{implementation}    \\
+         \textbf{4}  & kludge     &   \textbf{fixme}             \\
+         \textbf{5}  & stupidity  &   \textbf{xxx}               \\
+         \textbf{6}  & needed?    &   ends?             \\
+         \textbf{7}  & columns?   &   convention        \\
+         \textbf{8}  & unused?    &   configurable      \\
+         \textbf{9}  & wtf?       &   apparently        \\
+         \textbf{10} & todo       &   fudging           \\
+        \bottomrule
+        \end{tabular}
+    \end{center}    
+\end{table}
 
 It should be noted that the features highlighted in bold in Table~\ref{chap4:tbl:top_ten_features} appear in all top-10 lists extracted from each one of the ten training datasets, and therefore can be considered as more \textit{universal/stable} features compared to the others.
 
@@ -437,17 +442,6 @@ More specifically, we combine the comments from all projects into a single large
 
 We compute the F1-measure values after each iteration (i.e., the addition of a batch of 100 comments) and record the iteration that achieves the highest F1-measure. Then we find the iterations in which at least 80\% and 90\% of the maximum F1-measure value is achieved, and report the number of comments added up to those iterations.
 
-\begin{figure*}[!thb]
-    \centering
-    \subfigure[Design Debt]{\includegraphics[width=0.49\textwidth]{figures/chapter4/ten_fold_validation_average_100_requirement.pdf}
-    \label{chap4:fig:design_debt_per_comment_average}}
-    \subfigure[Requirement Debt]{\includegraphics[width=0.49\textwidth]{figures/chapter4/ten_fold_validation_average_100_requirement.pdf}
-    \label{chap4:fig:requirement_debt_per_comment_average}}
-    % \vspace{-2mm}
-    \caption{F1-measure achieved by incrementally adding batches of 100 comments in the training dataset.}
-\end{figure*}
-
-
 \noindent \textbf{Results - design debt:} Figure~\ref{chap4:fig:design_debt_per_comment_average} shows the average F1-measure values obtained when detecting design \SATD, while adding batches of 100 comments. We find that the F1-measure score improves as we increase the number of comments in the training dataset, and the highest value (i.e., 0.824) is achieved with 42,700 comments. However, the steepest improvement in the F1-measure performance takes place within the first 2K-4K comments. Additionally, 80\% and 90\% of the maximum F1-measure value is achieved with 3,900 and 9,700 comments in the training dataset, respectively.
 Since each batch of comments consists of approximately 5\% (i.e., $\frac{2,703}{58,122}$) comments with design \SATD, the iteration achieving 80\% of the maximum F1-measure value contains 195 comments with design \SATD,
 while the iteration achieving 90\% of the maximum F1-measure value contains 485 such comments.
@@ -463,6 +457,17 @@ In conclusion, to achieve 80\% of the maximum F1-measure value, we need only 5\%
   
 \conclusionbox{We find that to achieve a performance equivalent to 90\% of the maximum F1-measure score, only 23\% of the comments are required for both design and requirement \SATD. For a performance equivalent to 80\% of the maximum F1-measure score, only 9\% and 5\% of the comments are required for design and requirement \SATD, respectively.}
 
+
+\begin{figure*}[!thb]
+    \centering
+    \subfigure[Design Debt]{\includegraphics[width=0.8\textwidth]{figures/chapter4/ten_fold_validation_average_100_requirement.pdf}
+    \label{chap4:fig:design_debt_per_comment_average}}
+    \subfigure[Requirement Debt]{\includegraphics[width=0.8\textwidth]{figures/chapter4/ten_fold_validation_average_100_requirement.pdf}
+    \label{chap4:fig:requirement_debt_per_comment_average}}
+    \caption{F1-measure achieved by incrementally adding batches of 100 comments in the training dataset.}
+\end{figure*}
+
+
 \section{Discussion}
 \label{chap4:sec:discussion}
 
@@ -473,6 +478,7 @@ Moreover, we think that is also interesting to know the performance of our appro
 Also, when performing our classification, there are several different classifiers that can be used in the Stanford Classifier toolkit, hence we investigate what is the impact of using different classifiers on the accuracy (Section~\ref{chap4:sec:underlying_classifier}).
 
 Lastly, we analyze the overlap between the files that contain \SATD and the files that contain code smells. This is an interesting point of discussion to provide insights on how technical debt found in comments relates to code smells found by static analysis tools (Section~\ref{sec:overlap_with_static_analysis_tools}).
+
 
 \subsection{Textual Similarity for Design and Requirement Debt}
 \label{chap4:sec:textual_similarity}
@@ -488,27 +494,16 @@ Figure~\ref{fig:textual_similarity} shows that the median and the upper quartile
 The median for requirement debt comments is 0.018, whereas, the median for design debt comments is 0.011.
 To ensure that the difference is statistically significant, we perform the Wilcoxon test to calculate the p-value. The calculated p-value is less than 2.2e-16 showing that the result is indeed statistically significant (i.e., p \textless 0.001). Considering our findings, our hypothesis is validated, showing that requirement \SATD comments are more similar to each other compared to design \SATD comments. This may help explain why requirement debt needs a smaller set of positive weight textual features to be detected.
 
-\begin{figure}[t]
+\clearpage
+\begin{figure}[!thb]
   \centering
-  \includegraphics[width = 0.48\textwidth]{figures/chapter4/textual_similarity_removing_stop_words.pdf}
-  \vspace{-3mm}
+  \includegraphics[width = 0.8\textwidth]{figures/chapter4/textual_similarity_removing_stop_words.pdf}
   \caption{Textual Similarity Between Design and Requirement Debt Comments}
   \label{fig:textual_similarity}
 \end{figure}
 
 \subsection{Distinguishing Self-Admitted Technical Debt from Non-Self-Admitted Technical Debt Comments}
 \label{chap4:sec:coarse-grained_classes}
-
-So far, we analyzed the performance of our NLP-based approach to identify distinct types of \SATD (i.e., design and requirement debt). However, a simpler distinction between \SATD and non-debt comments can also be interesting in the case those fine-grained classes of debt are not considered necessary by a user of the proposed NLP-based detection approach. Another reason justifying such a coarse-grained distinction is that the cost of building a training dataset with fine-grained classes of debt is more expensive, mentally challenging, and subjective than building a training dataset with just two classes (i.e., comments with and without technical debt).
-
-In order to compute the performance of our NLP-based approach using only two classes (i.e., comments with and without technical debt), we repeat RQ1 and RQ2 with modified training and test datasets.
-First, we take all design and requirement \SATD comments and label them with a common class i.e., technical debt, and the remaining comments we kept them labeled as without technical debt.
-Second, we run the maximum entropy classifier in the same leave-one-out cross-project validation fashion, using the comments of 9 projects to train the classifier and the comments from the remaining project to test the classifier. We repeat this process for each of the ten projects and compute the average F1-measure. Lastly, we analyze the textual features used to identify the self-admitted technical debt comments.
-
-Table \ref{chap4:tbl:nlpbased_performance_comparison} compares the F1-measure achieved when detecting design debt, requirement debt, separately and when detecting both combined in a single class. As we can see, the performance when detecting technical debt is very similar with the performance of the classifier when detecting design debt. This is expected, as the majority of technical debt comments in the training dataset are labeled with the design debt class. Nevertheless, the performance achieved when detecting design debt was surpassed in the projects where the classifier performed well in detecting requirement debt, for example, in Columba (0.601 vs. 0.750) and SQuirrel SQL (0.540 vs. 0.593). 
-
-We find that the average performance when detecting design and requirement \SATD combined is better (0.636) than the performance achieved when detecting them individually (0.620 and 0.403 for design and requirement debt, respectively).
-
 
 \begin{table}[!thb]
   \begin{center}
@@ -558,18 +553,18 @@ We find that the average performance when detecting design and requirement \SATD
    \end{center}    
 \end{table}
 
+So far, we analyzed the performance of our NLP-based approach to identify distinct types of \SATD (i.e., design and requirement debt). However, a simpler distinction between \SATD and non-debt comments can also be interesting in the case those fine-grained classes of debt are not considered necessary by a user of the proposed NLP-based detection approach. Another reason justifying such a coarse-grained distinction is that the cost of building a training dataset with fine-grained classes of debt is more expensive, mentally challenging, and subjective than building a training dataset with just two classes (i.e., comments with and without technical debt).
+
+In order to compute the performance of our NLP-based approach using only two classes (i.e., comments with and without technical debt), we repeat RQ1 and RQ2 with modified training and test datasets.
+First, we take all design and requirement \SATD comments and label them with a common class i.e., technical debt, and the remaining comments we kept them labeled as without technical debt.
+Second, we run the maximum entropy classifier in the same leave-one-out cross-project validation fashion, using the comments of 9 projects to train the classifier and the comments from the remaining project to test the classifier. We repeat this process for each of the ten projects and compute the average F1-measure. Lastly, we analyze the textual features used to identify the self-admitted technical debt comments.
+
+Table \ref{chap4:tbl:nlpbased_performance_comparison} compares the F1-measure achieved when detecting design debt, requirement debt, separately and when detecting both combined in a single class. As we can see, the performance when detecting technical debt is very similar with the performance of the classifier when detecting design debt. This is expected, as the majority of technical debt comments in the training dataset are labeled with the design debt class. Nevertheless, the performance achieved when detecting design debt was surpassed in the projects where the classifier performed well in detecting requirement debt, for example, in Columba (0.601 vs. 0.750) and SQuirrel SQL (0.540 vs. 0.593). 
+
+We find that the average performance when detecting design and requirement \SATD combined is better (0.636) than the performance achieved when detecting them individually (0.620 and 0.403 for design and requirement debt, respectively).
+
 Table \ref{chap4:tbl:top_ten_features_td_vs_non_td} shows a comparison of the top-10 textual features used to detect design and requirement debt comments separately, and those used to detect both types of debt combined in a single class.
 When analyzing the top-10 textual features used to classify \SATD, we find once more, a strong overlap with the top-10 textual features used to classify design debt. The weight of the features is attributed in accordance to the frequency that each word is found in the training dataset, and therefore, the top-10 features tend to be similar with the top-10 design debt features, since design debt comments represent the majority of \SATD comments in the dataset. 
-
-\begin{figure*}[!thb]
-  \centering
-  \subfigure[Design Debt]{\includegraphics[width=0.48\textwidth]{figures/chapter4/classifier_algorithms_comparison_design_1.pdf}
-  \label{chap4:fig:algorithms_comparison_design}}
-  \subfigure[Requirement Debt]{\includegraphics[width=0.48\textwidth]{figures/chapter4/classifier_algorithms_comparison_implementation_1.pdf}
-  \label{chap4:fig:algorithms_comparison_requirement}}
-  \caption{Underlying Classifier Algorithms Performance Comparison}
-  \label{chap4:fig:algorithms_comparison}
-\end{figure*}
 
 \subsection{Investigating the Impact of Different Classifiers on the Accuracy of the Classification}
 \label{chap4:sec:underlying_classifier}
@@ -582,6 +577,17 @@ Although the Binary classifier has a slightly better performance, for our purpos
 According to previous work, developers hate to deal with false positives (i.e., low precision) \cite{Bessey2010FBL,Ernst2015FSE,Sadowski2015ICSE}. Due to this fact, we choose to present our results in this study using the maximum entropy classifier, which has an average precision of 0.716 throughout all projects. However, favouring recall over precision by using the Naives Bayes classifier might still be acceptable, if a manual process to filter out false positives is in place, as reported by Berry et al. \cite{Berry2012book}.
 
 One important question to ask when choosing what kind of classifier to use is how much training data is currently available. In most of the cases, the trickiest part of applying a machine learning classifier in real world applications is creating or obtaining enough training data. If you have fairly little data at your disposal, and you are going to train a supervised classifier, then machine learning theory recommends classifiers with high bias, such as the Naive Bayes~\cite{Forman2004PKDD,Ng2001NIPS}. If there is a reasonable amount of labeled data, then you are in good stand to use most kinds of classifiers~\cite{Manning2008book}. For instance, you may wish to use a Support Vector Machine (SVM), a decision tree or, like in our study, a max entropy classifier. If a large amount of data is available, then the choice of classifier probably has little effect on the results and the best choice may be unclear~\cite{Banko2001book}. It may be best to choose a classifier based on the scalability of training, or even runtime efficiency.
+
+\clearpage
+\begin{figure*}[!thb]
+  \centering
+  \subfigure[Design Debt]{\includegraphics[width=0.8\textwidth]{figures/chapter4/classifier_algorithms_comparison_design_1.pdf}
+  \label{chap4:fig:algorithms_comparison_design}}
+  \subfigure[Requirement Debt]{\includegraphics[width=0.8\textwidth]{figures/chapter4/classifier_algorithms_comparison_implementation_1.pdf}
+  \label{chap4:fig:algorithms_comparison_requirement}}
+  \caption{Underlying Classifier Algorithms Performance Comparison}
+  \label{chap4:fig:algorithms_comparison}
+\end{figure*}
 
 
 \subsection{Investigating the Overlap Between Technical Debt Found in Comments and Technical Debt Found by Static Analysis Tools}
@@ -604,9 +610,10 @@ Our findings here shows that using code comments to identify technical debt is a
 
 \begin{landscape}
 \begin{table*}[!thb]
-    \begin{center}
+    \centering
         \caption{Overlap between the files containing \SATD and the files containing code smells as detected by JDeodorant}
         \label{tbl:static_analysis_tool_and_self_admitted_technical_debt_overlap_using_jdeodorant}
+        \resizebox{\columnwidth}{!}{%
         \begin{tabular}{l| c c c c c c c c c}
         \toprule
         \textbf{\thead{Project}} & \textbf{\thead{\# of \\Files with\\ SATD }} & \textbf{\thead{\# of SATD \\Files with \\ Long \\Method }} & \textbf{\thead{\%  of SATD \\Files with \\ Long \\Method}} & \textbf{\thead{\# of SATD \\Files with \\ Feature \\Envy}} & \textbf{\thead{\% of SATD \\fFles with \\ Feature \\Envy}} & \textbf{\thead{\# of SATD\\ Files with \\ God \\Class}} & \textbf{\thead{\% of SATD\\ Files with \\ God \\Class}} & \textbf{\thead{\# of SATD\\ Files with\\ Any Code \\Smell }} & \textbf{\thead{\% of SATD\\ Files with\\ Any Code \\Smell}}\\
@@ -626,8 +633,7 @@ Our findings here shows that using code comments to identify technical debt is a
         \textbf{Average}        &     &      & 65.0  &    & 20.7  &     & 44.2 &     & 69.7  \\
 
         \bottomrule
-        \end{tabular}
-    \end{center}
+        \end{tabular}}
 \end{table*} 
 \end{landscape}
 

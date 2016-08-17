@@ -55,7 +55,7 @@ Our work is different from the aforementioned work that uses code smells to dete
             \label{chap3:tab:project_details}
             \begin{tabular}{l| c c r c c }
             \toprule
-            \textbf{Project}   & \textbf{Release}  & \textbf{\# of classes}   & \textbf{SLOC}    & \textbf{\# of comments}  & \textbf{\# of contributors} \\ \midrule 
+            \textbf{\thead{Project}}   & \textbf{\thead{Release}}  & \textbf{\thead{\# of \\classes}}   & \textbf{\thead{SLOC}}    & \textbf{\thead{\# of \\comments}}  & \textbf{\thead{\# of \\contributors}} \\ \midrule 
               Apache Ant       & 1.7.0             &  1,475                   & 115,881          & 21,587                   & 74  \\                       
               Apache Jmeter    & 2.10              &  1,181                   &  81,307          & 20,084                   & 33  \\                         
               ArgoUML          & 0.34              &  2,609                   & 176,839          & 67,716                   & 87  \\               
@@ -104,9 +104,9 @@ The steps mentioned above significantly reduced the number of comments in our da
       \begin{center}
             \caption{Filtering heuristics details}
             \label{chap3:tab:filtering_heuristics_details}
-            \begin{tabular}{l| p{0.55in} p{0.75in} p{0.75in} }
+            \begin{tabular}{l| c c c}
             \toprule
-            \thead{\textbf{Project}}   & \textbf{Total \# of comments}  & \textbf{\# of comments after filtering} & \textbf{\%  of TD-related comments}\\ \midrule 
+            \textbf{\thead{Project}}   & \textbf{\thead{Total \# of\\ comments}}  & \textbf{\thead{\# of \\comments \\after filtering}} & \textbf{\thead{\%  of \\TD-related \\comments}}\\ \midrule 
               Apache Ant       & 21,587                & 4,140                   & 19.17 \% \\ 
               Apache Jmeter    & 20,084                & 8,163                   & 40.64 \% \\
               ArgoUML          & 67,716                & 9,788                   & 14.45 \% \\              
@@ -250,8 +250,7 @@ After classifying the comments, we notice that not all of the types mentioned in
 
 \begin{figure*}[thb!]
   \centering
-  \includegraphics[width=0.87\textwidth]{figures/chapter3/technical_debt_distribution.pdf}
-  \vspace{-3mm}
+  \includegraphics[width=1\textwidth]{figures/chapter3/technical_debt_distribution.pdf}
   \caption{Self-admitted technical debt types distribution}
   \label{chap3:fig:satd_distribution}
 \end{figure*}
@@ -262,9 +261,9 @@ In addition to determining the different type of self-admitted technical debt, w
      \begin{center}
            \caption{Self-admitted technical debt per project}
            \label{tab:total_self_admitted_per_project}
-           \begin{tabular}{l| p{0.75in} p{.7in} p{0.7in} }
+           \begin{tabular}{l| c c c }
            \toprule
-           \textbf{Project}      & \textbf{\# of analyzed comments}     & \textbf{\# of self-admitted TD comments} & \textbf{\% of self-admitted TD per project} \\ \midrule 
+           \textbf{\thead{Project}}      & \textbf{\thead{\# of analyzed \\comments}}     & \textbf{\thead{\# of \\self-admitted TD \\comments}} & \textbf{\thead{\% of \\self-admitted TD\\ per project}} \\ \midrule 
              Apache Ant          & 4,140                          & 134                                & 3.2  \\                                   
              Apache Jmeter       & 8,163                          & 375                                & 4.6  \\                                   
              ArgoUML             & 9,788                          & 1,653                              & 16.8 \\                                   
