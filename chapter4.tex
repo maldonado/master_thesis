@@ -31,7 +31,7 @@ We find that the top design debt words are related to sloppy or mediocre source 
 Finally, to determine the most efficient way to apply our approach, we analyze the amount of training data necessary to effectively identify \SATD. We find that training datasets using 23\% of the available data can achieve a performance equivalent to 90\% of the maximum F1-measure score for both design and requirement \SATD. Similarly, 80\% of the maximum F1-measure can be achieved using only 9\% of the available data for design \SATD, and 5\% for requirement \SATD.
 
 The main contributions of our work are the following:
-% \vspace{-1.5mm}
+
 \begin{itemize}
   \item We provide an automatic, NLP-based, approach to identify design and requirement \SATD.
   \item We examine and report the words that best indicate design and requirement \SATD.
@@ -48,10 +48,8 @@ results in Section \ref{chap4:experiment_results}. We discuss the implications o
 \begin{figure*}[thb!]
   \centering
   \includegraphics[width=1\textwidth]{figures/chapter4/approach_reviwed.pdf}
-  % \vspace{-6mm}
-  \caption{Approach Overview}
+  \caption{NLP Based Approach Overview}
   \label{chap4:fig:approach}
-  % \vspace{-4mm}
 \end{figure*}
 
 The main goal of our study is to automatically identify \SATD through source code comments. To do that, we first extract the comments from ten open source projects. Second, we apply five filtering heuristics to remove comments that are irrelevant for the identification of \SATD  (e.g., license comments, commented source code and Javadoc comments). After that, we manually classify the remaining comments into the different types of \SATD (i.e., design debt, requirement debt, defect debt, documentation debt and test debt). Lastly, we use these comments as training data for the maximum entropy classified and use the trained model to detect \SATD from source code comments. Figure~\ref{chap4:fig:approach} shows an overview of our approach, and the following subsections detail each step.
@@ -72,7 +70,7 @@ The number of contributors was extracted from OpenHub, an on-line community and 
 
 \begin{table}[thb!]
     
-    \caption{Details of the Studied Projects}
+    \caption{Details of All Studied Projects}
     \label{chap4:tab:project_details}
     
     \centering
@@ -233,7 +231,7 @@ The goal of our research is to develop an automatic way to detect design and req
 \begin{landscape}
 \begin{table*}[!thb]
     \centering
-        \caption{Comparison of F1-measure between the NLP-based, the Comment Patterns and the Random Baseline Approaches for Design and Requirement Debt}
+        \caption{Comparison of F1-measure Between the NLP-based, the Comment Patterns and the Random Baseline Approaches for Design and Requirement Debt}
         \label{chap4:tbl:improvement_f1measure}
         \resizebox{\columnwidth}{!}{%
         \begin{tabular}{l| c c c c c| c c c c c}
@@ -514,7 +512,7 @@ We compute the F1-measure values after each iteration (i.e., the addition of a b
     \label{chap4:fig:design_debt_per_comment_average}}
     \subfigure[Requirement Debt]{\includegraphics[width=0.48\textwidth]{figures/chapter4/ten_fold_validation_average_100_requirement.pdf}
     \label{chap4:fig:requirement_debt_per_comment_average}}
-    \caption{F1-measure achieved by incrementally adding batches of 100 comments in the training dataset.}
+    \caption{F1-measure Achieved by Incrementally Adding Batches of 100 Comments in the Training Dataset.}
 \end{figure}
 
 \noindent \textbf{Results - design debt:} Figure~\ref{chap4:fig:design_debt_per_comment_average} shows the average F1-measure values obtained when detecting design \SATD, while adding batches of 100 comments. We find that the F1-measure score improves as we increase the number of comments in the training dataset, and the highest value (i.e., 0.824) is achieved with 42,700 comments. However, the steepest improvement in the F1-measure performance takes place within the first 2K-4K comments. Additionally, 80\% and 90\% of the maximum F1-measure value is achieved with 3,900 and 9,700 comments in the training dataset, respectively.
@@ -742,7 +740,7 @@ Our findings here shows that using code comments to identify technical debt is a
 \begin{landscape}
 \begin{table*}[!thb]
     \centering
-        \caption{Overlap between the files containing \SATD and the files containing code smells as detected by JDeodorant}
+        \caption{Overlap Between the Files Containing \SATD and the Files Containing Code Smells as Detected by JDeodorant}
         \label{tbl:static_analysis_tool_and_self_admitted_technical_debt_overlap_using_jdeodorant}
         \resizebox{\columnwidth}{!}{%
         \begin{tabular}{l| c c c c c c c c c}
